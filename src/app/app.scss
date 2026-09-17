@@ -1,0 +1,19 @@
+.app-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 300;
+  height: var(--border-width-thick);
+  background-color: var(--color-primary);
+  animation: app-progress-bar-sweep 1s ease-in-out infinite;
+}
+
+@keyframes app-progress-bar-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}

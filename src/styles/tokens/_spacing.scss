@@ -1,0 +1,42 @@
+// Spacing / radius / border-width tokens. Not explicitly named in the color
+// palette spec, but required by the component rule that nothing may hardcode
+// padding, border, or border-radius — components consume these via
+// `var(--space-*)` / `var(--radius-*)` / `var(--border-width-*)` directly,
+// same as the color semantic tokens.
+$spacing: (
+  '0': 0,
+  '1': 0.25rem,
+  '2': 0.5rem,
+  '3': 0.75rem,
+  '4': 1rem,
+  '5': 1.25rem,
+  '6': 1.5rem,
+  '8': 2rem,
+  '10': 2.5rem,
+  '12': 3rem,
+);
+
+$radius: (
+  'sm': 0.25rem,
+  'md': 0.5rem,
+  'lg': 0.75rem,
+  'full': 9999px,
+);
+
+$border-width: (
+  'thin': 1px,
+  'medium': 2px,
+  'thick': 4px,
+);
+
+:root {
+  @each $name, $value in $spacing {
+    --space-#{$name}: #{$value};
+  }
+  @each $name, $value in $radius {
+    --radius-#{$name}: #{$value};
+  }
+  @each $name, $value in $border-width {
+    --border-width-#{$name}: #{$value};
+  }
+}

@@ -1,0 +1,112 @@
+// Semantic layer — references primitive CSS custom properties only, never raw
+// HSLA values. Defined once per theme (`light` / `dark`); the *names* below are
+// the single source of truth that `_color-utilities.scss` loops over to
+// generate `.text-*` / `.bg-*` / `.border-*` classes, so adding a token here
+// automatically gets a utility class.
+//
+// Component SCSS must reference these `--color-*` variables only — never
+// `--color-primary-500` (primitive) and never a literal color.
+@use 'sass:map';
+
+$light: (
+  'surface': var(--color-white),
+  'surface-elevated': var(--color-grey-50),
+  'surface-sunken': var(--color-grey-100),
+  'text-primary': var(--color-grey-900),
+  'text-secondary': var(--color-grey-600),
+  'text-inverse': var(--color-white),
+  'text-disabled': var(--color-grey-400),
+  'primary': var(--color-primary-400),
+  'primary-hover': var(--color-primary-500),
+  'primary-active': var(--color-primary-500),
+  'primary-subtle': var(--color-primary-100),
+  'secondary': var(--color-secondary-400),
+  'secondary-hover': var(--color-secondary-500),
+  'secondary-active': var(--color-secondary-500),
+  'secondary-subtle': var(--color-secondary-100),
+  'success': var(--color-success-500),
+  'success-hover': var(--color-success-500),
+  'success-subtle': var(--color-success-100),
+  'warning': var(--color-warning-500),
+  'warning-hover': var(--color-warning-500),
+  'warning-subtle': var(--color-warning-100),
+  'error': var(--color-error-500),
+  'error-hover': var(--color-error-500),
+  'error-subtle': var(--color-error-100),
+  'accent': var(--color-accent),
+  'white': var(--color-white),
+  'border': var(--color-grey-200),
+  'border-strong': var(--color-grey-300),
+  'focus-ring': var(--color-primary-300),
+  'overlay': var(--color-grey-900),
+  'status-bg-default': var(--color-status-bg-default),
+  'status-bg-active': var(--color-status-bg-active),
+  'status-bg-suspended': var(--color-status-bg-suspended),
+  'status-bg-declined': var(--color-status-bg-declined),
+  'status-bg-completed': var(--color-status-bg-completed),
+  'status-text-default': var(--color-status-text-default),
+  'status-text-active': var(--color-status-text-active),
+  'status-text-suspended': var(--color-status-text-suspended),
+  'status-text-declined': var(--color-status-text-declined),
+  'status-text-completed': var(--color-status-text-completed),
+);
+
+$dark: (
+  'surface': var(--color-grey-900),
+  'surface-elevated': var(--color-grey-800),
+  'surface-sunken': hsla(222, 18%, 8%, 1),
+  'text-primary': var(--color-grey-50),
+  'text-secondary': var(--color-grey-400),
+  'text-inverse': var(--color-grey-900),
+  'text-disabled': var(--color-grey-600),
+  'primary': var(--color-primary-300),
+  'primary-hover': var(--color-primary-200),
+  'primary-active': var(--color-primary-200),
+  'primary-subtle': var(--color-primary-500),
+  'secondary': var(--color-secondary-300),
+  'secondary-hover': var(--color-secondary-200),
+  'secondary-active': var(--color-secondary-200),
+  'secondary-subtle': var(--color-secondary-500),
+  'success': var(--color-success-300),
+  'success-hover': var(--color-success-300),
+  'success-subtle': var(--color-success-500),
+  'warning': var(--color-warning-300),
+  'warning-hover': var(--color-warning-300),
+  'warning-subtle': var(--color-warning-500),
+  'error': var(--color-error-300),
+  'error-hover': var(--color-error-300),
+  'error-subtle': var(--color-error-500),
+  'accent': var(--color-accent),
+  'white': var(--color-white),
+  'border': var(--color-grey-700),
+  'border-strong': var(--color-grey-600),
+  'focus-ring': var(--color-primary-300),
+  'overlay': hsla(0, 0%, 0%, 1),
+  'status-bg-default': var(--color-grey-800),
+  'status-bg-active': var(--color-success-500),
+  'status-bg-suspended': var(--color-warning-500),
+  'status-bg-declined': var(--color-error-500),
+  'status-bg-completed': var(--color-primary-500),
+  'status-text-default': var(--color-grey-300),
+  'status-text-active': var(--color-success-100),
+  'status-text-suspended': var(--color-warning-100),
+  'status-text-declined': var(--color-error-100),
+  'status-text-completed': var(--color-primary-100),
+);
+
+:root,
+[data-theme='light'] {
+  @each $name, $value in $light {
+    --color-#{$name}: #{$value};
+  }
+}
+
+[data-theme='dark'] {
+  @each $name, $value in $dark {
+    --color-#{$name}: #{$value};
+  }
+}
+
+// Exposed so `_color-utilities.scss` can generate one class per token without
+// duplicating this list.
+$semantic-color-tokens: map.keys($light);

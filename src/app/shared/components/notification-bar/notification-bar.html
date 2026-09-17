@@ -1,0 +1,35 @@
+@if (topNotifications().length > 0) {
+  <div class="notification-bar notification-bar--top">
+    @for (notification of topNotifications(); track notification.id) {
+      <div class="notification-bar__item" [class]="'notification-bar__item--' + notification.type">
+        <span class="notification-bar__message">{{ notification.message }}</span>
+        <button
+          type="button"
+          class="notification-bar__dismiss"
+          aria-label="Dismiss"
+          (click)="dismiss(notification.id)"
+        >
+          ×
+        </button>
+      </div>
+    }
+  </div>
+}
+
+@if (bottomNotifications().length > 0) {
+  <div class="notification-bar notification-bar--bottom">
+    @for (notification of bottomNotifications(); track notification.id) {
+      <div class="notification-bar__item" [class]="'notification-bar__item--' + notification.type">
+        <span class="notification-bar__message">{{ notification.message }}</span>
+        <button
+          type="button"
+          class="notification-bar__dismiss"
+          aria-label="Dismiss"
+          (click)="dismiss(notification.id)"
+        >
+          ×
+        </button>
+      </div>
+    }
+  </div>
+}

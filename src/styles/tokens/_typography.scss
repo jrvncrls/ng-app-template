@@ -1,0 +1,88 @@
+// Typography tokens — kept separate from color tokens per spec. Theme/brand
+// independent, so these only ever live under `:root`.
+//
+// The maps below are exposed (not just emitted as CSS vars) so
+// `_typography-utilities.scss` can `@each` over them to generate classes —
+// add a heading level or body size/weight here and the utility exists.
+@use 'sass:map';
+
+$font-family-base:
+  'Inter',
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  Roboto,
+  sans-serif;
+
+$font-weights: (
+  'light': 300,
+  'regular': 400,
+  'semibold': 600,
+  'bold': 700,
+);
+
+// size, line-height, weight (weight key must exist in $font-weights)
+$headings: (
+  'h1': (
+    size: 2.5rem,
+    line-height: 1.2,
+    weight: 'bold',
+  ),
+  'h2': (
+    size: 2rem,
+    line-height: 1.25,
+    weight: 'bold',
+  ),
+  'h3': (
+    size: 1.75rem,
+    line-height: 1.3,
+    weight: 'semibold',
+  ),
+  'h4': (
+    size: 1.5rem,
+    line-height: 1.35,
+    weight: 'semibold',
+  ),
+  'h5': (
+    size: 1.25rem,
+    line-height: 1.4,
+    weight: 'semibold',
+  ),
+  'h6': (
+    size: 1rem,
+    line-height: 1.4,
+    weight: 'semibold',
+  ),
+);
+
+// 16px base ('md'). Every size is available in every weight (generated in
+// _typography-utilities.scss).
+$body-sizes: (
+  'xs': 0.75rem,
+  'sm': 0.875rem,
+  'md': 1rem,
+  'lg': 1.125rem,
+  'xl': 1.25rem,
+);
+
+$body-line-height: 1.5;
+
+:root {
+  --font-family-base: #{$font-family-base};
+
+  @each $name, $weight in $font-weights {
+    --font-weight-#{$name}: #{$weight};
+  }
+
+  @each $name, $props in $headings {
+    --font-size-#{$name}: #{map.get($props, size)};
+    --line-height-#{$name}: #{map.get($props, line-height)};
+    --font-weight-#{$name}: #{map.get($font-weights, map.get($props, weight))};
+  }
+
+  @each $name, $size in $body-sizes {
+    --font-size-body-#{$name}: #{$size};
+  }
+
+  --line-height-body: #{$body-line-height};
+}

@@ -1,0 +1,23 @@
+<label class="select">
+  @if (label()) {
+    <span class="select__label">{{ label() }}</span>
+  }
+
+  <select
+    class="select__field"
+    [class.select__field--invalid]="errorMessage()"
+    [disabled]="disabled()"
+    [value]="value() ?? ''"
+    (change)="handleChange($any($event.target).value)"
+    (blur)="handleBlur()"
+  >
+    <option value="" disabled>{{ placeholder() }}</option>
+    @for (option of options(); track option.value) {
+      <option [value]="option.value">{{ option.label }}</option>
+    }
+  </select>
+
+  @if (errorMessage(); as message) {
+    <span class="select__error">{{ message }}</span>
+  }
+</label>

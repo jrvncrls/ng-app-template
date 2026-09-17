@@ -1,0 +1,25 @@
+.error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  min-height: 100%;
+  padding: var(--space-8);
+  text-align: center;
+}
+
+.error-page__code {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-h1);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.error-page__message {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-body-lg);
+  color: var(--color-text-secondary);
+  margin: 0;
+}

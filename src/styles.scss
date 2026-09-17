@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+// Global styles entry point. Component styles must never duplicate this file
+// — they consume the tokens defined here via `var(--...)` only.
+@use 'styles/tokens';
+@use 'styles/utilities';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-body);
+  font-weight: var(--font-weight-regular);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}

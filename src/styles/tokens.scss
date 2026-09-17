@@ -1,0 +1,11 @@
+// Single entry point for the token layer. Import order matters: primitives
+// first (raw values), then semantic (references primitives), then the
+// theme/brand-independent typography and spacing scales.
+//
+// To add a brand: create `tokens/_primitives.<brand>.scss` (copy
+// `_primitives.default.scss`, keep the map keys, change the values, pass
+// `$is-default: false`) and add a `@forward` line for it below.
+@forward 'tokens/primitives.default';
+@forward 'tokens/semantic';
+@forward 'tokens/typography';
+@forward 'tokens/spacing';

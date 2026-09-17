@@ -1,0 +1,22 @@
+:host {
+  display: inline-block;
+}
+
+$statuses: 'default', 'active', 'suspended', 'declined', 'completed';
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-body-xs);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-full);
+  padding: var(--space-1) var(--space-3);
+
+  @each $status in $statuses {
+    &--#{$status} {
+      background-color: var(--color-status-bg-#{$status});
+      color: var(--color-status-text-#{$status});
+    }
+  }
+}

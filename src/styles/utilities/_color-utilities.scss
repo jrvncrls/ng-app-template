@@ -1,0 +1,18 @@
+// Auto-generated from the semantic color token list — add a token to
+// `_semantic.scss`'s `$light` map and `.text-*` / `.bg-*` / `.border-*`
+// utilities for it appear here with no other change.
+@use '../tokens/semantic';
+
+@each $name in semantic.$semantic-color-tokens {
+  .text-#{$name} {
+    color: var(--color-#{$name});
+  }
+
+  .bg-#{$name} {
+    background-color: var(--color-#{$name});
+  }
+
+  .border-#{$name} {
+    border-color: var(--color-#{$name});
+  }
+}

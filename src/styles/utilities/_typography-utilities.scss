@@ -1,0 +1,24 @@
+// Auto-generated from the typography token maps — add a heading level or a
+// body size to `_typography.scss` and its utility classes appear here with no
+// other change.
+@use '../tokens/typography';
+
+@each $name, $props in typography.$headings {
+  .text-#{$name} {
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-#{$name});
+    line-height: var(--line-height-#{$name});
+    font-weight: var(--font-weight-#{$name});
+  }
+}
+
+@each $size, $_ in typography.$body-sizes {
+  @each $weight, $_ in typography.$font-weights {
+    .text-body-#{$size}-#{$weight} {
+      font-family: var(--font-family-base);
+      font-size: var(--font-size-body-#{$size});
+      line-height: var(--line-height-body);
+      font-weight: var(--font-weight-#{$weight});
+    }
+  }
+}

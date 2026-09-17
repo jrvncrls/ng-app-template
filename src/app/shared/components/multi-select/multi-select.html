@@ -1,0 +1,38 @@
+<div class="multi-select">
+  @if (label()) {
+    <span class="multi-select__label">{{ label() }}</span>
+  }
+
+  <div class="multi-select__control">
+    <button
+      type="button"
+      class="multi-select__trigger"
+      [class.multi-select__trigger--invalid]="errorMessage()"
+      [disabled]="disabled()"
+      (click)="togglePanel()"
+    >
+      <span>{{ summary() }}</span>
+    </button>
+
+    @if (open()) {
+      <ul class="multi-select__panel">
+        @for (option of options(); track option.value) {
+          <li>
+            <label class="multi-select__option">
+              <input
+                type="checkbox"
+                [checked]="isSelected(option.value)"
+                (change)="toggleOption(option.value)"
+              />
+              <span>{{ option.label }}</span>
+            </label>
+          </li>
+        }
+      </ul>
+    }
+  </div>
+
+  @if (errorMessage(); as message) {
+    <span class="multi-select__error">{{ message }}</span>
+  }
+</div>

@@ -1,0 +1,20 @@
+<label class="input-text">
+  @if (label()) {
+    <span class="input-text__label">{{ label() }}</span>
+  }
+
+  <input
+    class="input-text__field"
+    [class.input-text__field--invalid]="errorMessage()"
+    [type]="type()"
+    [placeholder]="placeholder()"
+    [disabled]="disabled()"
+    [value]="value()"
+    (input)="handleInput($any($event.target).value)"
+    (blur)="handleBlur()"
+  />
+
+  @if (errorMessage(); as message) {
+    <span class="input-text__error">{{ message }}</span>
+  }
+</label>

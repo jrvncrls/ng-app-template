@@ -1,0 +1,38 @@
+:host {
+  display: block;
+}
+
+.checkbox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-family: var(--font-family-base);
+}
+
+.checkbox__row {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+}
+
+.checkbox__input {
+  width: var(--space-4);
+  height: var(--space-4);
+  accent-color: var(--color-primary);
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.checkbox__label {
+  font-size: var(--font-size-body-md);
+  color: var(--color-text-primary);
+}
+
+.checkbox__error {
+  font-size: var(--font-size-body-xs);
+  color: var(--color-error);
+}

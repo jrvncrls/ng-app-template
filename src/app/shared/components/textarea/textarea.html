@@ -1,0 +1,20 @@
+<label class="textarea">
+  @if (label()) {
+    <span class="textarea__label">{{ label() }}</span>
+  }
+
+  <textarea
+    class="textarea__field"
+    [class.textarea__field--invalid]="errorMessage()"
+    [rows]="rows()"
+    [placeholder]="placeholder()"
+    [disabled]="disabled()"
+    [value]="value()"
+    (input)="handleInput($any($event.target).value)"
+    (blur)="handleBlur()"
+  ></textarea>
+
+  @if (errorMessage(); as message) {
+    <span class="textarea__error">{{ message }}</span>
+  }
+</label>

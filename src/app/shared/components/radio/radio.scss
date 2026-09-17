@@ -1,0 +1,45 @@
+:host {
+  display: block;
+}
+
+.radio {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-family: var(--font-family-base);
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.radio__label {
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-secondary);
+  padding: 0;
+}
+
+.radio__option {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-body-md);
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.radio__input {
+  width: var(--space-4);
+  height: var(--space-4);
+  accent-color: var(--color-primary);
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.radio__error {
+  font-size: var(--font-size-body-xs);
+  color: var(--color-error);
+}

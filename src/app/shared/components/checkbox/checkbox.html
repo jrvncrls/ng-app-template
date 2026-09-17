@@ -1,0 +1,19 @@
+<div class="checkbox">
+  <label class="checkbox__row">
+    <input
+      class="checkbox__input"
+      type="checkbox"
+      [checked]="value()"
+      [disabled]="disabled()"
+      (change)="handleChange($any($event.target).checked)"
+      (blur)="handleBlur()"
+    />
+    @if (label()) {
+      <span class="checkbox__label">{{ label() }}</span>
+    }
+  </label>
+
+  @if (errorMessage(); as message) {
+    <span class="checkbox__error">{{ message }}</span>
+  }
+</div>

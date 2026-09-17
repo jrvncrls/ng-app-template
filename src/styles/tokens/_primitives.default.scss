@@ -1,0 +1,94 @@
+// Primitive layer — "default" brand.
+//
+// Raw HSLA values only. Nothing in this file references a semantic concept
+// (no "surface", no "border") — that mapping happens in `_semantic.scss`.
+//
+// To add a new brand: copy this file to `_primitives.<brand>.scss`, keep every
+// map key identical, change the HSLA values, call `primitive-tokens(...)` with
+// `$is-default: false`, and forward it from `tokens.scss`. Nothing outside the
+// primitive layer needs to change.
+@use 'primitive-mixins' as *;
+
+$primary: (
+  100: hsla(217, 91%, 93%, 1),
+  200: hsla(217, 91%, 80%, 1),
+  300: hsla(217, 91%, 60%, 1),
+  400: hsla(217, 91%, 48%, 1),
+  500: hsla(217, 91%, 38%, 1),
+);
+
+$secondary: (
+  100: hsla(262, 83%, 94%, 1),
+  200: hsla(262, 83%, 82%, 1),
+  300: hsla(262, 83%, 66%, 1),
+  400: hsla(262, 83%, 52%, 1),
+  500: hsla(262, 83%, 40%, 1),
+);
+
+$success: (
+  100: hsla(142, 71%, 92%, 1),
+  300: hsla(142, 71%, 45%, 1),
+  500: hsla(142, 71%, 29%, 1),
+);
+
+$warning: (
+  100: hsla(38, 92%, 90%, 1),
+  300: hsla(38, 92%, 50%, 1),
+  500: hsla(32, 92%, 38%, 1),
+);
+
+$error: (
+  100: hsla(0, 84%, 93%, 1),
+  300: hsla(0, 84%, 60%, 1),
+  500: hsla(0, 74%, 42%, 1),
+);
+
+// One flat color per status — these are intentionally not part of the 5-shade
+// primary/secondary scales since a status is a fixed meaning, not a ramp.
+$status-bg: (
+  default: hsla(220, 14%, 93%, 1),
+  active: hsla(142, 71%, 92%, 1),
+  suspended: hsla(38, 92%, 90%, 1),
+  declined: hsla(0, 84%, 93%, 1),
+  completed: hsla(217, 91%, 93%, 1),
+);
+
+$status-text: (
+  default: hsla(220, 9%, 30%, 1),
+  active: hsla(142, 71%, 25%, 1),
+  suspended: hsla(32, 80%, 30%, 1),
+  declined: hsla(0, 74%, 38%, 1),
+  completed: hsla(217, 91%, 32%, 1),
+);
+
+// Single hue, lightness stepped — per spec.
+$grey: (
+  50: hsla(220, 14%, 98%, 1),
+  100: hsla(220, 14%, 96%, 1),
+  200: hsla(220, 13%, 91%, 1),
+  300: hsla(220, 12%, 84%, 1),
+  400: hsla(220, 10%, 70%, 1),
+  500: hsla(220, 9%, 55%, 1),
+  600: hsla(220, 9%, 42%, 1),
+  700: hsla(220, 11%, 32%, 1),
+  800: hsla(220, 14%, 22%, 1),
+  900: hsla(222, 18%, 12%, 1),
+);
+
+$white: hsla(0, 0%, 100%, 1);
+$accent: hsla(174, 72%, 40%, 1);
+
+@include primitive-tokens(
+  'default',
+  $primary,
+  $secondary,
+  $success,
+  $warning,
+  $error,
+  $status-bg,
+  $status-text,
+  $grey,
+  $white,
+  $accent,
+  $is-default: true
+);

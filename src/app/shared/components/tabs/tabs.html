@@ -1,0 +1,20 @@
+<div class="tabs">
+  <div class="tabs__list" role="tablist">
+    @for (tab of tabs(); track tab.id) {
+      <button
+        type="button"
+        role="tab"
+        class="tabs__tab"
+        [class.tabs__tab--active]="activeId() === tab.id"
+        [attr.aria-selected]="activeId() === tab.id"
+        (click)="selectTab(tab.id)"
+      >
+        {{ tab.label }}
+      </button>
+    }
+  </div>
+
+  <div class="tabs__panel">
+    <ng-content />
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="toggle">
+  <span class="toggle__row">
+    <button
+      type="button"
+      class="toggle__track"
+      [class.toggle__track--on]="value()"
+      role="switch"
+      [attr.aria-checked]="value()"
+      [attr.aria-label]="label() || null"
+      [disabled]="disabled()"
+      (click)="handleToggle()"
+      (blur)="handleBlur()"
+    >
+      <span class="toggle__thumb"></span>
+    </button>
+    @if (label()) {
+      <span class="toggle__label">{{ label() }}</span>
+    }
+  </span>
+
+  @if (errorMessage(); as message) {
+    <span class="toggle__error">{{ message }}</span>
+  }
+</div>

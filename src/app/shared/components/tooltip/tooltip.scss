@@ -1,0 +1,44 @@
+:host {
+  display: inline-block;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip__bubble {
+  position: absolute;
+  z-index: 20;
+  white-space: nowrap;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-body-xs);
+  color: var(--color-text-inverse);
+  background-color: var(--color-grey-900);
+  border-radius: var(--radius-sm);
+  padding: var(--space-1) var(--space-2);
+
+  &--top {
+    bottom: calc(100% + var(--space-1));
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &--bottom {
+    top: calc(100% + var(--space-1));
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &--left {
+    right: calc(100% + var(--space-1));
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &--right {
+    left: calc(100% + var(--space-1));
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

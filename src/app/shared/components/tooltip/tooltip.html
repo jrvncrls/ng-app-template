@@ -1,0 +1,8 @@
+<span class="tooltip">
+  <ng-content />
+  @if (visible()) {
+    <span class="tooltip__bubble" [class]="'tooltip__bubble--' + position()" role="tooltip">
+      {{ text() }}
+    </span>
+  }
+</span>

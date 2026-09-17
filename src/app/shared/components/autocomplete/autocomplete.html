@@ -1,0 +1,39 @@
+<label class="autocomplete">
+  @if (label()) {
+    <span class="autocomplete__label">{{ label() }}</span>
+  }
+
+  <div class="autocomplete__control">
+    <input
+      class="autocomplete__field"
+      [class.autocomplete__field--invalid]="errorMessage()"
+      type="text"
+      [placeholder]="placeholder()"
+      [disabled]="disabled()"
+      [value]="value()"
+      (input)="handleInput($any($event.target).value)"
+      (focus)="handleFocus()"
+      (blur)="handleBlur()"
+    />
+
+    @if (open() && filteredOptions().length > 0) {
+      <ul class="autocomplete__panel">
+        @for (option of filteredOptions(); track option.value) {
+          <li>
+            <button
+              type="button"
+              class="autocomplete__option"
+              (mousedown)="$event.preventDefault(); selectOption(option)"
+            >
+              {{ option.label }}
+            </button>
+          </li>
+        }
+      </ul>
+    }
+  </div>
+
+  @if (errorMessage(); as message) {
+    <span class="autocomplete__error">{{ message }}</span>
+  }
+</label>

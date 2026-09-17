@@ -1,0 +1,50 @@
+// Shared plumbing for the primitive layer. Brand files (`_primitives.<brand>.scss`) only
+// supply raw HSLA maps and call `primitive-tokens(...)` — this mixin is the only place that
+// knows how those maps turn into CSS custom properties.
+@mixin primitive-tokens(
+  $brand,
+  $primary,
+  $secondary,
+  $success,
+  $warning,
+  $error,
+  $status-bg,
+  $status-text,
+  $grey,
+  $white,
+  $accent,
+  $is-default: false
+) {
+  // The default brand also seeds :root so the app renders correctly before
+  // a `data-brand` attribute is ever set on <html>.
+  $selector: if($is-default, ':root, [data-brand="#{$brand}"]', '[data-brand="#{$brand}"]');
+
+  #{$selector} {
+    @each $shade, $value in $primary {
+      --color-primary-#{$shade}: #{$value};
+    }
+    @each $shade, $value in $secondary {
+      --color-secondary-#{$shade}: #{$value};
+    }
+    @each $shade, $value in $success {
+      --color-success-#{$shade}: #{$value};
+    }
+    @each $shade, $value in $warning {
+      --color-warning-#{$shade}: #{$value};
+    }
+    @each $shade, $value in $error {
+      --color-error-#{$shade}: #{$value};
+    }
+    @each $status, $value in $status-bg {
+      --color-status-bg-#{$status}: #{$value};
+    }
+    @each $status, $value in $status-text {
+      --color-status-text-#{$status}: #{$value};
+    }
+    @each $shade, $value in $grey {
+      --color-grey-#{$shade}: #{$value};
+    }
+    --color-white: #{$white};
+    --color-accent: #{$accent};
+  }
+}
