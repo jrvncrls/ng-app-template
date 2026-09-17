@@ -1,0 +1,138 @@
+<div class="showcase">
+  <h1 class="text-h1 showcase__title">Component showcase</h1>
+  <p class="text-body-md-regular showcase__intro">
+    One of every shared component, wired up so its states are visible. Dev reference only.
+  </p>
+
+  <!-- Button -->
+  <app-card testId="showcase-card-button" title="Button">
+    <div class="showcase__row">
+      <app-button testId="showcase-button-primary" variant="primary">Primary</app-button>
+      <app-button testId="showcase-button-secondary" variant="secondary">Secondary</app-button>
+      <app-button testId="showcase-button-ghost" variant="ghost">Ghost</app-button>
+      <app-button testId="showcase-button-danger" variant="danger">Danger</app-button>
+      <app-button testId="showcase-button-disabled" [disabled]="true">Disabled</app-button>
+    </div>
+  </app-card>
+
+  <!-- Badge -->
+  <app-card testId="showcase-card-badge" title="Badge">
+    <div class="showcase__row">
+      @for (status of badgeStatuses; track status) {
+        <app-badge [testId]="'showcase-badge-' + status" [status]="status">{{ status }}</app-badge>
+      }
+    </div>
+  </app-card>
+
+  <!-- Loader -->
+  <app-card testId="showcase-card-loader" title="Loader">
+    <div class="showcase__row showcase__row--center">
+      <app-loader testId="showcase-loader-sm" size="sm" />
+      <app-loader testId="showcase-loader-md" size="md" />
+      <app-loader testId="showcase-loader-lg" size="lg" />
+    </div>
+  </app-card>
+
+  <!-- Tooltip -->
+  <app-card testId="showcase-card-tooltip" title="Tooltip">
+    <div class="showcase__row">
+      <app-tooltip testId="showcase-tooltip-top" text="Top tooltip" position="top">
+        <app-button testId="showcase-tooltip-top-trigger" variant="secondary">Hover (top)</app-button>
+      </app-tooltip>
+      <app-tooltip testId="showcase-tooltip-bottom" text="Bottom tooltip" position="bottom">
+        <app-button testId="showcase-tooltip-bottom-trigger" variant="secondary">Hover (bottom)</app-button>
+      </app-tooltip>
+    </div>
+  </app-card>
+
+  <!-- Tabs -->
+  <app-card testId="showcase-card-tabs" title="Tabs">
+    <app-tabs testId="showcase-tabs" [tabs]="tabItems" [(activeId)]="activeTabId">
+      @switch (activeTabId()) {
+        @case ('first') {
+          <p class="text-body-md-regular">Content for the first tab.</p>
+        }
+        @case ('second') {
+          <p class="text-body-md-regular">Content for the second tab.</p>
+        }
+        @case ('third') {
+          <p class="text-body-md-regular">Content for the third tab.</p>
+        }
+      }
+    </app-tabs>
+  </app-card>
+
+  <!-- Modal -->
+  <app-card testId="showcase-card-modal" title="Modal">
+    <app-button testId="showcase-modal-trigger" (click)="modalOpen.set(true)">Open modal</app-button>
+    <app-modal testId="showcase-modal" title="Showcase modal" [(open)]="modalOpen">
+      <p class="text-body-md-regular">This is the modal body content.</p>
+      <app-button testId="showcase-modal-close" (click)="modalOpen.set(false)">Close</app-button>
+    </app-modal>
+  </app-card>
+
+  <!-- Notification -->
+  <app-card testId="showcase-card-notification" title="Notification">
+    <div class="showcase__row">
+      <app-button testId="showcase-notify-success" variant="primary" (click)="notifySuccess()">
+        Success
+      </app-button>
+      <app-button testId="showcase-notify-error" variant="danger" (click)="notifyError()">
+        Error
+      </app-button>
+      <app-button testId="showcase-notify-warning" variant="secondary" (click)="notifyWarning()">
+        Warning
+      </app-button>
+      <app-button testId="showcase-notify-info" variant="ghost" (click)="notifyInfo()">
+        Info
+      </app-button>
+    </div>
+  </app-card>
+
+  <!-- Form-capable components, bound to a real reactive form so validation states are visible -->
+  <app-card testId="showcase-card-form" title="Form controls">
+    <form class="showcase__form" [formGroup]="form" (ngSubmit)="submitForm()">
+      <app-input-text testId="showcase-input-name" label="Name" formControlName="name" />
+
+      <app-textarea testId="showcase-textarea-bio" label="Bio" formControlName="bio" [rows]="3" />
+
+      <app-select
+        testId="showcase-select-color"
+        label="Favorite color"
+        [options]="selectOptions"
+        formControlName="color"
+      />
+
+      <app-multi-select
+        testId="showcase-multi-select-frameworks"
+        label="Frameworks you know"
+        [options]="multiSelectOptions"
+        formControlName="frameworks"
+      />
+
+      <app-autocomplete
+        testId="showcase-autocomplete-fruit"
+        label="Favorite fruit"
+        [options]="autocompleteOptions"
+        formControlName="fruit"
+      />
+
+      <app-radio
+        testId="showcase-radio-size"
+        label="Size"
+        [options]="radioOptions"
+        formControlName="size"
+      />
+
+      <app-checkbox
+        testId="showcase-checkbox-terms"
+        label="I agree to the terms"
+        formControlName="agreeToTerms"
+      />
+
+      <app-toggle testId="showcase-toggle-notify" label="Notify me" formControlName="notifyMe" />
+
+      <app-button testId="showcase-form-submit" type="submit">Submit</app-button>
+    </form>
+  </app-card>
+</div>

@@ -1,0 +1,33 @@
+.showcase {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-6);
+}
+
+.showcase__title {
+  margin: 0;
+}
+
+.showcase__intro {
+  margin: 0 0 var(--space-2);
+  color: var(--color-text-secondary);
+}
+
+.showcase__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.showcase__row--center {
+  align-items: center;
+}
+
+.showcase__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 24rem;
+}
