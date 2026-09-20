@@ -1,4 +1,5 @@
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   computed,
@@ -11,6 +12,7 @@ import {
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 import { resolveErrorMessage } from '../../utils/control-error-messages';
+import { isControlRequired } from '../../utils/control-required';
 
 @Component({
   selector: 'app-checkbox',
@@ -25,6 +27,8 @@ import { resolveErrorMessage } from '../../utils/control-error-messages';
 export class Checkbox implements ControlValueAccessor {
   readonly testId = input.required<string>();
   readonly label = input<string>('');
+  /** Shows the required marker; also shown automatically when the bound control has `Validators.required`. */
+  readonly required = input(false, { transform: booleanAttribute });
   readonly errorMessages = input<Record<string, string>>();
 
   readonly value = model<boolean>(false);
@@ -63,6 +67,10 @@ export class Checkbox implements ControlValueAccessor {
   protected handleBlur(): void {
     this.touched.set(true);
     this.onTouchedFn();
+  }
+
+  protected isRequired(): boolean {
+    return this.required() || isControlRequired(this.ngControl?.control);
   }
 
   writeValue(value: boolean): void {

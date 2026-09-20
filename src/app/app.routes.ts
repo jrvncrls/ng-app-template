@@ -8,9 +8,7 @@ export const routes: Routes = [
   {
     path: 'showcase',
     loadComponent: () =>
-      import('./features/component-showcase/component-showcase').then(
-        (m) => m.ComponentShowcase,
-      ),
+      import('./features/component-showcase/component-showcase').then((m) => m.ComponentShowcase),
   },
   // Feature areas register their own lazy-loaded routes here, e.g.:
   // {

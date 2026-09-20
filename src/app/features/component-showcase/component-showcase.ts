@@ -2,7 +2,10 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { NotificationService } from '../../core/services/notification.service';
-import { Autocomplete, AutocompleteOption } from '../../shared/components/autocomplete/autocomplete';
+import {
+  Autocomplete,
+  AutocompleteOption,
+} from '../../shared/components/autocomplete/autocomplete';
 import { Badge, BadgeStatus } from '../../shared/components/badge/badge';
 import { Button } from '../../shared/components/button/button';
 import { Card } from '../../shared/components/card/card';

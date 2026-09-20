@@ -1,4 +1,5 @@
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   computed,
@@ -11,6 +12,7 @@ import {
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 import { resolveErrorMessage } from '../../utils/control-error-messages';
+import { isControlRequired } from '../../utils/control-required';
 
 export interface RadioOption {
   label: string;
@@ -34,6 +36,8 @@ let nextGroupId = 0;
 export class Radio implements ControlValueAccessor {
   readonly testId = input.required<string>();
   readonly label = input<string>('');
+  /** Shows the required marker; also shown automatically when the bound control has `Validators.required`. */
+  readonly required = input(false, { transform: booleanAttribute });
   readonly options = input.required<RadioOption[]>();
   readonly errorMessages = input<Record<string, string>>();
 
@@ -75,6 +79,10 @@ export class Radio implements ControlValueAccessor {
   protected handleBlur(): void {
     this.touched.set(true);
     this.onTouchedFn();
+  }
+
+  protected isRequired(): boolean {
+    return this.required() || isControlRequired(this.ngControl?.control);
   }
 
   writeValue(value: string | null): void {

@@ -1,6 +1,11 @@
 <div class="multi-select">
   @if (label()) {
-    <span class="multi-select__label">{{ label() }}</span>
+    <span class="multi-select__label">
+      {{ label() }}
+      @if (isRequired()) {
+        <span class="text-error" aria-hidden="true">*</span>
+      }
+    </span>
   }
 
   <div class="multi-select__control">

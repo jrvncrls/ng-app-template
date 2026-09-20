@@ -1,12 +1,18 @@
 <label class="select">
   @if (label()) {
-    <span class="select__label">{{ label() }}</span>
+    <span class="select__label">
+      {{ label() }}
+      @if (isRequired()) {
+        <span class="text-error" aria-hidden="true">*</span>
+      }
+    </span>
   }
 
   <select
     class="select__field"
     [class.select__field--invalid]="errorMessage()"
     [disabled]="disabled()"
+    [attr.aria-required]="isRequired() || null"
     [value]="value() ?? ''"
     (change)="handleChange($any($event.target).value)"
     (blur)="handleBlur()"

@@ -1,4 +1,5 @@
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   computed,
@@ -11,6 +12,7 @@ import {
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 import { resolveErrorMessage } from '../../utils/control-error-messages';
+import { isControlRequired } from '../../utils/control-required';
 
 export interface AutocompleteOption {
   label: string;
@@ -30,6 +32,8 @@ export interface AutocompleteOption {
 export class Autocomplete implements ControlValueAccessor {
   readonly testId = input.required<string>();
   readonly label = input<string>('');
+  /** Shows the required marker; also shown automatically when the bound control has `Validators.required`. */
+  readonly required = input(false, { transform: booleanAttribute });
   readonly placeholder = input<string>('');
   readonly options = input.required<AutocompleteOption[]>();
   readonly errorMessages = input<Record<string, string>>();
@@ -91,6 +95,10 @@ export class Autocomplete implements ControlValueAccessor {
   protected selectOption(option: AutocompleteOption): void {
     this.value.set(option.value);
     this.open.set(false);
+  }
+
+  protected isRequired(): boolean {
+    return this.required() || isControlRequired(this.ngControl?.control);
   }
 
   writeValue(value: string): void {

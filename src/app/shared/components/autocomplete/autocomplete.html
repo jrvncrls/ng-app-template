@@ -1,6 +1,11 @@
 <label class="autocomplete">
   @if (label()) {
-    <span class="autocomplete__label">{{ label() }}</span>
+    <span class="autocomplete__label">
+      {{ label() }}
+      @if (isRequired()) {
+        <span class="text-error" aria-hidden="true">*</span>
+      }
+    </span>
   }
 
   <div class="autocomplete__control">
@@ -10,6 +15,7 @@
       type="text"
       [placeholder]="placeholder()"
       [disabled]="disabled()"
+      [attr.aria-required]="isRequired() || null"
       [value]="value()"
       (input)="handleInput($any($event.target).value)"
       (focus)="handleFocus()"

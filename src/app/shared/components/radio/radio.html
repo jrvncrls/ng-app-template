@@ -1,6 +1,11 @@
 <fieldset class="radio">
   @if (label()) {
-    <legend class="radio__label">{{ label() }}</legend>
+    <legend class="radio__label">
+      {{ label() }}
+      @if (isRequired()) {
+        <span class="text-error" aria-hidden="true">*</span>
+      }
+    </legend>
   }
 
   @for (option of options(); track option.value) {

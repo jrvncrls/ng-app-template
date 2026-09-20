@@ -1,6 +1,11 @@
 <label class="textarea">
   @if (label()) {
-    <span class="textarea__label">{{ label() }}</span>
+    <span class="textarea__label">
+      {{ label() }}
+      @if (isRequired()) {
+        <span class="text-error" aria-hidden="true">*</span>
+      }
+    </span>
   }
 
   <textarea
@@ -9,6 +14,7 @@
     [rows]="rows()"
     [placeholder]="placeholder()"
     [disabled]="disabled()"
+    [attr.aria-required]="isRequired() || null"
     [value]="value()"
     (input)="handleInput($any($event.target).value)"
     (blur)="handleBlur()"

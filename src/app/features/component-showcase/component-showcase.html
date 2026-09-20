@@ -37,10 +37,14 @@
   <app-card testId="showcase-card-tooltip" title="Tooltip">
     <div class="showcase__row">
       <app-tooltip testId="showcase-tooltip-top" text="Top tooltip" position="top">
-        <app-button testId="showcase-tooltip-top-trigger" variant="secondary">Hover (top)</app-button>
+        <app-button testId="showcase-tooltip-top-trigger" variant="secondary"
+          >Hover (top)</app-button
+        >
       </app-tooltip>
       <app-tooltip testId="showcase-tooltip-bottom" text="Bottom tooltip" position="bottom">
-        <app-button testId="showcase-tooltip-bottom-trigger" variant="secondary">Hover (bottom)</app-button>
+        <app-button testId="showcase-tooltip-bottom-trigger" variant="secondary"
+          >Hover (bottom)</app-button
+        >
       </app-tooltip>
     </div>
   </app-card>
@@ -64,7 +68,9 @@
 
   <!-- Modal -->
   <app-card testId="showcase-card-modal" title="Modal">
-    <app-button testId="showcase-modal-trigger" (click)="modalOpen.set(true)">Open modal</app-button>
+    <app-button testId="showcase-modal-trigger" (click)="modalOpen.set(true)"
+      >Open modal</app-button
+    >
     <app-modal testId="showcase-modal" title="Showcase modal" [(open)]="modalOpen">
       <p class="text-body-md-regular">This is the modal body content.</p>
       <app-button testId="showcase-modal-close" (click)="modalOpen.set(false)">Close</app-button>

@@ -14,7 +14,12 @@
       <span class="toggle__thumb"></span>
     </button>
     @if (label()) {
-      <span class="toggle__label">{{ label() }}</span>
+      <span class="toggle__label">
+        {{ label() }}
+        @if (isRequired()) {
+          <span class="text-error" aria-hidden="true">*</span>
+        }
+      </span>
     }
   </span>
 

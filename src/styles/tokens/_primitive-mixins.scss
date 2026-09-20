@@ -36,15 +36,15 @@
       --color-error-#{$shade}: #{$value};
     }
     @each $status, $value in $status-bg {
-      --color-status-bg-#{$status}: #{$value};
+      --color-status-fill-#{$status}: #{$value};
     }
     @each $status, $value in $status-text {
-      --color-status-text-#{$status}: #{$value};
+      --color-status-ink-#{$status}: #{$value};
     }
     @each $shade, $value in $grey {
       --color-grey-#{$shade}: #{$value};
     }
-    --color-white: #{$white};
-    --color-accent: #{$accent};
+    --color-white-base: #{$white};
+    --color-accent-base: #{$accent};
   }
 }

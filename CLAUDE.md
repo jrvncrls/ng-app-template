@@ -56,6 +56,12 @@ Naming convention (confirmed with the project owner before the component set was
 the same `--{category}-{name}` shape: `--space-4`, `--radius-md`, `--border-width-thin`,
 `--font-size-body-md`, `--font-weight-semibold`, `--font-size-h1`.
 
+**A primitive var name must never equal a semantic one.** Both layers are emitted on `:root`, so
+`--color-x: var(--color-x)` is a circular reference and the property silently becomes invalid.
+That's why the flat primitives are `--color-status-fill-*`, `--color-status-ink-*`,
+`--color-white-base` and `--color-accent-base` while the semantic tokens are `--color-status-bg-*`,
+`--color-status-text-*`, `--color-white` and `--color-accent`.
+
 Typography lives in its own file (`styles/tokens/_typography.scss`), theme/brand-independent,
 `:root`-only: font family, `h1`–`h6` (size + line-height + weight per level), and body sizes
 `xs`/`sm`/`md`(16px base)/`lg`/`xl`. `styles/utilities/_typography-utilities.scss` generates
@@ -64,7 +70,7 @@ Typography lives in its own file (`styles/tokens/_typography.scss`), theme/brand
 
 Spacing/radius/border-width (`styles/tokens/_spacing.scss`) aren't part of the original color
 palette spec but exist because the "no hardcoded padding/border/radius" rule requires
-*something* to reference; they follow the identical map-driven, `:root`-only pattern.
+_something_ to reference; they follow the identical map-driven, `:root`-only pattern.
 
 `data-brand` and `data-theme` are set on `<html>` in `index.html` (`data-brand="default"
 data-theme="light"` by default) — switching either at runtime (e.g. a theme toggle) is just
@@ -146,7 +152,7 @@ in this order: `authInterceptor`, `errorInterceptor`, `loadingInterceptor`.
    re-throws its own original error, tokens are cleared, and the router navigates to
    `/error?code=401`.
 4. The refresh HTTP call itself is tagged with `skipAuthHandling()` (`core/http/
-   skip-auth-handling.context.ts`) so a 401 *from the refresh endpoint* doesn't recurse back into
+skip-auth-handling.context.ts`) so a 401 _from the refresh endpoint_ doesn't recurse back into
    step 1 — it goes straight to `/error?code=401`.
 
 `AuthRefreshCoordinatorService` is deliberately an injectable singleton rather than a

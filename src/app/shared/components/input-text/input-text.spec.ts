@@ -30,6 +30,43 @@ describe('InputText', () => {
     });
   });
 
+  describe('required marker', () => {
+    @Component({
+      standalone: true,
+      imports: [InputText, ReactiveFormsModule],
+      template: `
+        <app-input-text testId="required" label="Email" [formControl]="requiredControl" />
+        <app-input-text testId="optional" label="Nickname" [formControl]="optionalControl" />
+      `,
+    })
+    class HostComponent {
+      readonly requiredControl = new FormControl('', Validators.required);
+      readonly optionalControl = new FormControl('');
+    }
+
+    it('shows a red asterisk only when the bound control is required', () => {
+      const fixture = TestBed.createComponent(HostComponent);
+      fixture.detectChanges();
+
+      const [requiredField, optionalField] =
+        fixture.nativeElement.querySelectorAll('app-input-text');
+      expect(requiredField.querySelector('.text-error')?.textContent).toBe('*');
+      expect(requiredField.querySelector('input').getAttribute('aria-required')).toBe('true');
+      expect(optionalField.querySelector('.text-error')).toBeNull();
+      expect(optionalField.querySelector('input').hasAttribute('aria-required')).toBe(false);
+    });
+
+    it('shows the asterisk for the standalone `required` input', () => {
+      const fixture = TestBed.createComponent(InputText);
+      fixture.componentRef.setInput('testId', 'name-field');
+      fixture.componentRef.setInput('label', 'Name');
+      fixture.componentRef.setInput('required', true);
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('.text-error')?.textContent).toBe('*');
+    });
+  });
+
   describe('ControlValueAccessor', () => {
     it('writeValue sets the internal value signal', () => {
       const fixture = TestBed.createComponent(InputText);

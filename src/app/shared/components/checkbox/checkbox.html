@@ -9,7 +9,12 @@
       (blur)="handleBlur()"
     />
     @if (label()) {
-      <span class="checkbox__label">{{ label() }}</span>
+      <span class="checkbox__label">
+        {{ label() }}
+        @if (isRequired()) {
+          <span class="text-error" aria-hidden="true">*</span>
+        }
+      </span>
     }
   </label>
 

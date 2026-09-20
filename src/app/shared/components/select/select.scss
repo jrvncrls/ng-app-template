@@ -28,7 +28,6 @@
 
   &:focus {
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 var(--border-width-medium) var(--color-focus-ring);
   }
 
   &:disabled {
