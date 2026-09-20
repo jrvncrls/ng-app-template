@@ -47,10 +47,17 @@
     color: var(--color-warning);
   }
 
+  // Matches the `completed` badge.
   &--info {
-    background-color: var(--color-primary-subtle);
-    color: var(--color-primary);
+    background-color: var(--color-status-bg-completed);
+    color: var(--color-status-text-completed);
   }
+}
+
+.notification-bar__icon {
+  flex-shrink: 0;
+  font-size: var(--font-size-body-lg);
+  line-height: 1;
 }
 
 .notification-bar__message {

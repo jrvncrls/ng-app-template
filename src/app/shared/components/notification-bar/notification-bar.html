@@ -2,6 +2,11 @@
   <div class="notification-bar notification-bar--top">
     @for (notification of topNotifications(); track notification.id) {
       <div class="notification-bar__item" [class]="'notification-bar__item--' + notification.type">
+        <i
+          class="notification-bar__icon"
+          [class]="'uil ' + icons[notification.type]"
+          aria-hidden="true"
+        ></i>
         <span class="notification-bar__message">{{ notification.message }}</span>
         <button
           type="button"
@@ -9,7 +14,7 @@
           aria-label="Dismiss"
           (click)="dismiss(notification.id)"
         >
-          ×
+          <i class="uil uil-times" aria-hidden="true"></i>
         </button>
       </div>
     }
@@ -20,6 +25,11 @@
   <div class="notification-bar notification-bar--bottom">
     @for (notification of bottomNotifications(); track notification.id) {
       <div class="notification-bar__item" [class]="'notification-bar__item--' + notification.type">
+        <i
+          class="notification-bar__icon"
+          [class]="'uil ' + icons[notification.type]"
+          aria-hidden="true"
+        ></i>
         <span class="notification-bar__message">{{ notification.message }}</span>
         <button
           type="button"
@@ -27,7 +37,7 @@
           aria-label="Dismiss"
           (click)="dismiss(notification.id)"
         >
-          ×
+          <i class="uil uil-times" aria-hidden="true"></i>
         </button>
       </div>
     }

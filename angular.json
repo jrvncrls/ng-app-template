@@ -36,6 +36,7 @@
               }
             ],
             "styles": [
+              "node_modules/@iconscout/unicons/css/line.css",
               "src/styles.scss"
             ]
           },

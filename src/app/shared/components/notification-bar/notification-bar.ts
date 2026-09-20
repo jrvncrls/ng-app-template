@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 
-import { NotificationService } from '../../../core/services/notification.service';
+import { NotificationService, NotificationType } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-notification-bar',
@@ -24,6 +24,14 @@ export class NotificationBar {
   protected readonly bottomNotifications = computed(() =>
     this.notifications().filter((notification) => notification.position === 'bottom'),
   );
+
+  // Unicons (`uil`) class per notification type.
+  protected readonly icons: Record<NotificationType, string> = {
+    success: 'uil-check-circle',
+    error: 'uil-times-circle',
+    warning: 'uil-exclamation-triangle',
+    info: 'uil-info-circle',
+  };
 
   protected dismiss(id: string): void {
     this.notificationService.dismiss(id);
