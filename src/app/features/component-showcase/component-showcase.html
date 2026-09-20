@@ -79,7 +79,9 @@
     >
     <app-modal testId="showcase-modal" title="Showcase modal" [(open)]="modalOpen">
       <p class="text-body-md-regular">This is the modal body content.</p>
-      <app-button testId="showcase-modal-close" (click)="modalOpen.set(false)">Close</app-button>
+      <div modal-actions>
+        <app-button testId="showcase-modal-close" (click)="modalOpen.set(false)">Close</app-button>
+      </div>
     </app-modal>
   </app-card>
 

@@ -18,6 +18,10 @@
       <div class="modal__body">
         <ng-content />
       </div>
+
+      <div class="modal__footer" [class]="'modal__footer--' + actionsAlign()">
+        <ng-content select="[modal-actions]" />
+      </div>
     </div>
   </div>
 }

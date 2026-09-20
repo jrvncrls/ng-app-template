@@ -69,3 +69,28 @@
   font-size: var(--font-size-body-md);
   color: var(--color-text-primary);
 }
+
+// Buttons projected via `[modal-actions]`. Hidden when nothing is projected so
+// a modal without actions gets no extra spacing.
+.modal__footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+
+  &:empty {
+    display: none;
+  }
+
+  &--start {
+    justify-content: flex-start;
+  }
+
+  &--center {
+    justify-content: center;
+  }
+
+  &--end {
+    justify-content: flex-end;
+  }
+}
