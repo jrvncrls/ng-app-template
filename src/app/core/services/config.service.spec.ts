@@ -25,6 +25,7 @@ describe('ConfigService', () => {
     const style = document.documentElement.style;
     expect(style.getPropertyValue('--color-primary-400')).not.toBe('');
     expect(style.getPropertyValue('--color-secondary-400')).not.toBe('');
+    expect(style.getPropertyValue('--color-grey-900')).toBe('hsla(221, 39%, 11%, 1)');
     style.cssText = '';
   });
 });

@@ -7,8 +7,9 @@ export interface AppRuntimeConfig {
   appName: string;
   brand: string;
   theme: 'light' | 'dark';
-  // 6-digit hex; each is the 400 shade, the rest of the ramp is derived.
-  colors: { primary: string; secondary: string };
+  // 6-digit hex; primary/secondary are the 400 shade, greyscaleBase is the
+  // grey 900 shade. The rest of each ramp is derived.
+  colors: { primary: string; secondary: string; greyscaleBase: string };
   logo: { light: string; dark: string; alt: string };
   favicon: string;
 }
@@ -20,7 +21,7 @@ const DEFAULT_CONFIG: AppRuntimeConfig = {
   appName: 'NgAppTemplate',
   brand: 'default',
   theme: 'light',
-  colors: { primary: '#111827', secondary: '#27A376' },
+  colors: { primary: '#111827', secondary: '#27A376', greyscaleBase: '#111827' },
   logo: { light: 'logo-light.svg', dark: 'logo-dark.svg', alt: 'NgAppTemplate' },
   favicon: 'favicon.ico',
 };
