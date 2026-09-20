@@ -2,6 +2,17 @@
   display: inline-block;
 }
 
+:host(.button-block) {
+  display: block;
+  // Explicit width so it also fills flex/grid parents, where a block host
+  // would otherwise shrink to its content.
+  width: 100%;
+
+  .button {
+    width: 100%;
+  }
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -12,12 +23,30 @@
   font-weight: var(--font-weight-semibold);
   border-radius: var(--radius-md);
   border: var(--border-width-thin) solid transparent;
+  min-height: var(--control-height-md);
   padding: var(--space-2) var(--space-4);
   cursor: pointer;
   transition:
     background-color 0.15s ease,
     border-color 0.15s ease,
     color 0.15s ease;
+
+  &--sm {
+    min-height: var(--control-height-sm);
+    padding: var(--space-1) var(--space-3);
+    font-size: var(--font-size-body-sm);
+
+    // Keep touch targets at the 44px minimum on phones and tablets.
+    @media (pointer: coarse) {
+      min-height: var(--control-height-md);
+    }
+  }
+
+  &--lg {
+    min-height: var(--control-height-lg);
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--font-size-body-lg);
+  }
 
   &:disabled {
     cursor: not-allowed;

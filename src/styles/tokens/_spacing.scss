@@ -23,6 +23,14 @@ $radius: (
   'full': 9999px,
 );
 
+// Minimum heights for interactive controls. `md` is 44px — the touch-target
+// minimum — so it is also the floor for every size on coarse pointers.
+$control-height: (
+  'sm': 2rem,
+  'md': 2.75rem,
+  'lg': 3.25rem,
+);
+
 $border-width: (
   'thin': 1px,
   'medium': 2px,
@@ -38,5 +46,8 @@ $border-width: (
   }
   @each $name, $value in $border-width {
     --border-width-#{$name}: #{$value};
+  }
+  @each $name, $value in $control-height {
+    --control-height-#{$name}: #{$value};
   }
 }
