@@ -1,0 +1,76 @@
+// Auto-generated from the spacing token scale — add a step to `$spacing` in
+// `_spacing.scss` and its `m-*`/`p-*`/`gap-*` utilities appear here with no
+// other change. Logical properties (`inline-start`/`inline-end`,
+// `block-start`/`block-end`) are used instead of left/right/top/bottom so
+// these utilities stay RTL-safe.
+@use '../tokens/spacing';
+
+@each $name, $_ in spacing.$spacing {
+  .m-#{$name} {
+    margin: var(--space-#{$name});
+  }
+
+  .mt-#{$name} {
+    margin-block-start: var(--space-#{$name});
+  }
+
+  .mb-#{$name} {
+    margin-block-end: var(--space-#{$name});
+  }
+
+  .ms-#{$name} {
+    margin-inline-start: var(--space-#{$name});
+  }
+
+  .me-#{$name} {
+    margin-inline-end: var(--space-#{$name});
+  }
+
+  .mx-#{$name} {
+    margin-inline: var(--space-#{$name});
+  }
+
+  .my-#{$name} {
+    margin-block: var(--space-#{$name});
+  }
+
+  .p-#{$name} {
+    padding: var(--space-#{$name});
+  }
+
+  .pt-#{$name} {
+    padding-block-start: var(--space-#{$name});
+  }
+
+  .pb-#{$name} {
+    padding-block-end: var(--space-#{$name});
+  }
+
+  .ps-#{$name} {
+    padding-inline-start: var(--space-#{$name});
+  }
+
+  .pe-#{$name} {
+    padding-inline-end: var(--space-#{$name});
+  }
+
+  .px-#{$name} {
+    padding-inline: var(--space-#{$name});
+  }
+
+  .py-#{$name} {
+    padding-block: var(--space-#{$name});
+  }
+
+  .gap-#{$name} {
+    gap: var(--space-#{$name});
+  }
+}
+
+.mx-auto {
+  margin-inline: auto;
+}
+
+.my-auto {
+  margin-block: auto;
+}
