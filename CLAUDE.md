@@ -80,6 +80,21 @@ Spacing/radius/border-width (`styles/tokens/_spacing.scss`) aren't part of the o
 palette spec but exist because the "no hardcoded padding/border/radius" rule requires
 _something_ to reference; they follow the identical map-driven, `:root`-only pattern.
 
+Stacking order (`styles/tokens/_z-index.scss`) follows the same pattern: one `$z-index` map,
+`--z-*` custom properties on `:root`, and every layer (`--z-dropdown: 1000`, `--z-tooltip: 1010`,
+`--z-modal-backdrop: 1040`, `--z-notification: 1050`, `--z-loading-bar: 1060`) defined in that one
+file, Bootstrap-style — starting at 1000 with 10-20 point gaps so a new layer can be inserted
+later without renumbering everything else. Component SCSS must reference `var(--z-*)` rather than
+hardcode a number, so the relative order between layers can't drift out of sync across files. A
+`z-index` used only for *local* stacking within a component's own stacking context (not competing
+with another layer) isn't on this scale — e.g. `Modal`'s inner `.modal` panel sitting above its
+own backdrop-dismiss button.
+
+`ModalService` (CDK Overlay) modals aren't on this scale either — CDK's own `.cdk-overlay-container`
+defaults to `z-index: 1000`, which would otherwise land *inside* this range instead of above it,
+so `styles/overlay.scss` raises it to `1100` to keep CDK modals always on top of every layer here
+(the same relative order this scale had before its own numbers were pushed up to the 1000s).
+
 `data-brand` and `data-theme` are set on `<html>` in `index.html` (`data-brand="default"
 data-theme="light"` by default) — switching either at runtime (e.g. a theme toggle) is just
 updating those two attributes; every component repaints automatically since it's all

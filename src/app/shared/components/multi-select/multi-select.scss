@@ -48,7 +48,7 @@
 
 .multi-select__panel {
   position: absolute;
-  z-index: 10;
+  z-index: var(--z-dropdown);
   top: calc(100% + var(--space-1));
   left: 0;
   right: 0;

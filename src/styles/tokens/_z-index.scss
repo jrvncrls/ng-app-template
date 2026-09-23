@@ -1,0 +1,33 @@
+// Single source of truth for stacking order across the app. Component SCSS
+// must reference these (`var(--z-*)`) instead of hardcoding a z-index — the
+// relative order between layers is the entire point, and it only stays
+// correct if it's declared in exactly one place.
+//
+// Bootstrap-style numbering: starts at 1000 with 10-20 point gaps between
+// adjacent layers, leaving headroom to insert a new layer later without
+// renumbering everything else.
+//
+// Not included here: a `z-index` used purely for *local* stacking within a
+// single component's own stacking context (e.g. sitting one element above
+// its own sibling), rather than to compete with another layer of the app.
+// That's a structural detail of the component, not a "layer" — tokenizing it
+// would add noise without a real single-source-of-truth benefit.
+//
+// `ModalService`-opened modals (CDK Overlay) are not on this scale — CDK's
+// own overlay container defaults to `z-index: 1000`, which would collide
+// with this range, so `styles/overlay.scss` raises it to sit above
+// `loading-bar`. That keeps CDK modals always on top of every layer here,
+// and this file's own max value is the thing that override must stay above.
+$z-index: (
+  'dropdown': 1000,
+  'tooltip': 1010,
+  'modal-backdrop': 1040,
+  'notification': 1050,
+  'loading-bar': 1060,
+);
+
+:root {
+  @each $name, $value in $z-index {
+    --z-#{$name}: #{$value};
+  }
+}

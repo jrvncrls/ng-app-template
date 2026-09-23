@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 300;
+  z-index: var(--z-loading-bar);
   height: var(--border-width-thick);
   background-color: var(--color-primary);
   animation: app-progress-bar-sweep 1s ease-in-out infinite;

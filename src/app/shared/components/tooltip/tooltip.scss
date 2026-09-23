@@ -9,7 +9,7 @@
 
 .tooltip__bubble {
   position: absolute;
-  z-index: 20;
+  z-index: var(--z-tooltip);
   white-space: nowrap;
   font-family: var(--font-family-base);
   font-size: var(--font-size-body-xs);

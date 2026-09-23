@@ -6,3 +6,14 @@
 .app-modal-backdrop {
   background-color: hsla(0, 0%, 0%, 0.5);
 }
+
+// CDK's own container defaults to `z-index: 1000`, which now sits inside our
+// `--z-*` scale (`tokens/_z-index.scss`, max 1060) instead of above it, since
+// that scale was rescaled to Bootstrap-style 1000+ numbers. Before that
+// rescale, our scale topped out under 100, so CDK's fixed 1000 already put
+// `ModalService`-opened modals above every layer here — this override just
+// preserves that same relative order (CDK modals always on top) rather than
+// changing it.
+.cdk-overlay-container {
+  z-index: 1100;
+}
