@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 
-import { environment } from '../../../environments/environment';
-import { skipAuthHandling } from '../http/skip-auth-handling.context';
-import { TokenStorageService } from './token-storage.service';
+import { environment } from '../../../../environments/environment';
+import { skipAuthHandling } from '../../http/skip-auth-handling.context';
+import { TokenStorageService } from '../token-storage/token-storage.service';
 
 interface RefreshResponse {
   accessToken: string;

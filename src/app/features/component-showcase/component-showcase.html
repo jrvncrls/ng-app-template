@@ -85,6 +85,13 @@
     </app-modal>
   </app-card>
 
+  <!-- ModalService: service-driven, stackable modal (a form modal that can itself open a confirm modal on top) -->
+  <app-card testId="showcase-card-modal-service" title="Modal (service, stacked)">
+    <app-button testId="showcase-service-modal-trigger" (click)="openServiceModal()">
+      Open via ModalService
+    </app-button>
+  </app-card>
+
   <!-- Notification -->
   <app-card testId="showcase-card-notification" title="Notification">
     <div class="showcase__row">

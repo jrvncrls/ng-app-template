@@ -9,11 +9,11 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, switchMap, take, throwError } from 'rxjs';
 
-import { SKIP_AUTH_HANDLING } from '../http/skip-auth-handling.context';
-import { AuthRefreshCoordinatorService } from '../services/auth-refresh-coordinator.service';
-import { NotificationService } from '../services/notification.service';
-import { TokenRefreshService } from '../services/token-refresh.service';
-import { TokenStorageService } from '../services/token-storage.service';
+import { SKIP_AUTH_HANDLING } from '../../http/skip-auth-handling.context';
+import { AuthRefreshCoordinatorService } from '../../services/auth-refresh-coordinator/auth-refresh-coordinator.service';
+import { NotificationService } from '../../services/notification/notification.service';
+import { TokenRefreshService } from '../../services/token-refresh/token-refresh.service';
+import { TokenStorageService } from '../../services/token-storage/token-storage.service';
 
 // Extend these two lists to reclassify a status — they're the only place
 // that decides "redirect to /error" vs. "toast a notification".

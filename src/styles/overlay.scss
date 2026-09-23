@@ -1,0 +1,8 @@
+// CDK Overlay renders its backdrop/pane elements directly under
+// `.cdk-overlay-container` (appended to `<body>`, outside any Angular
+// component's view), so they can't be styled from component SCSS — this has
+// to be global. Matches `.modal-backdrop`'s scrim in
+// `shared/components/modal/modal.scss`.
+.app-modal-backdrop {
+  background-color: hsla(0, 0%, 0%, 0.5);
+}

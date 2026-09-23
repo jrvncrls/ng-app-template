@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { NotificationService } from '../../core/services/notification.service';
+import { ModalService } from '../../core/services/modal/modal.service';
+import { NotificationService } from '../../core/services/notification/notification.service';
 import {
   Autocomplete,
   AutocompleteOption,
@@ -20,6 +21,7 @@ import { Tabs, TabItem } from '../../shared/components/tabs/tabs';
 import { Textarea } from '../../shared/components/textarea/textarea';
 import { Toggle } from '../../shared/components/toggle/toggle';
 import { Tooltip } from '../../shared/components/tooltip/tooltip';
+import { ShowcaseFormModal, ShowcaseFormResult } from './showcase-form-modal';
 
 // Not a real feature — a living catalog of every shared/components/* element,
 // each wired to something so its states (value, error, disabled, etc.) are
@@ -53,6 +55,7 @@ import { Tooltip } from '../../shared/components/tooltip/tooltip';
 export class ComponentShowcase {
   private readonly fb = inject(FormBuilder);
   private readonly notify = inject(NotificationService);
+  private readonly modalService = inject(ModalService);
 
   protected readonly badgeStatuses: BadgeStatus[] = [
     'default',
@@ -130,5 +133,19 @@ export class ComponentShowcase {
     if (this.form.valid) {
       this.notify.success('Form submitted.');
     }
+  }
+
+  protected openServiceModal(): void {
+    this.modalService
+      .open<ShowcaseFormModal, ShowcaseFormResult>(ShowcaseFormModal, {
+        title: 'Edit profile (service-driven, stacked)',
+        testId: 'showcase-service-modal',
+      })
+      .afterClosed()
+      .then((result) => {
+        if (result) {
+          this.notify.success(`Saved "${result.name}" via ModalService.`);
+        }
+      });
   }
 }

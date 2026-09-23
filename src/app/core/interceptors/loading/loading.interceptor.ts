@@ -2,9 +2,9 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { finalize } from 'rxjs';
 
-import { LOADING_KEY } from '../http/loading-context';
-import { LoadingService } from '../services/loading.service';
-import { RequestLoadingService } from '../services/request-loading.service';
+import { LOADING_KEY } from '../../http/loading-context';
+import { LoadingService } from '../../services/loading/loading.service';
+import { RequestLoadingService } from '../../services/request-loading/request-loading.service';
 
 export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
   const loading = inject(LoadingService);

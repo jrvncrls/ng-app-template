@@ -1,7 +1,7 @@
 import { CanActivateFn } from '@angular/router';
 import { inject } from '@angular/core';
 
-import { UserSessionService } from '../services/user-session.service';
+import { UserSessionService } from '../../services/user-session/user-session.service';
 
 // Stub — structure is in place but not enforced yet, since
 // `UserSessionService.currentUser` isn't populated by a real auth flow.

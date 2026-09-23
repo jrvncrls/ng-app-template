@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { LoadingService } from './core/services/loading.service';
+import { LoadingService } from './core/services/loading/loading.service';
 import { NotificationBar } from './shared/components/notification-bar/notification-bar';
 
 @Component({

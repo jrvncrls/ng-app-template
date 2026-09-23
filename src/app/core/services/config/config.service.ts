@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, inject, signal } from '@angular/core';
 
-import { applyBrandColors } from '../../shared/utils/brand-colors';
+import { applyBrandColors } from '../../../shared/utils/brand-colors';
 
 export interface AppRuntimeConfig {
   appName: string;
@@ -21,7 +21,7 @@ const DEFAULT_CONFIG: AppRuntimeConfig = {
   appName: 'NgAppTemplate',
   brand: 'default',
   theme: 'light',
-  colors: { primary: '#111827', secondary: '#27A376', greyscaleBase: '#111827' },
+  colors: { primary: '#27A376', secondary: '#111827', greyscaleBase: '#111827' },
   logo: { light: 'logo-light.svg', dark: 'logo-dark.svg', alt: 'NgAppTemplate' },
   favicon: 'favicon.ico',
 };

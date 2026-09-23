@@ -2,6 +2,7 @@
 // — they consume the tokens defined here via `var(--...)` only.
 @use 'styles/tokens';
 @use 'styles/utilities';
+@use 'styles/overlay';
 
 * {
   box-sizing: border-box;

@@ -1,3 +1,5 @@
+@use './modal-panel';
+
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -20,77 +22,4 @@
   background: none;
   padding: 0;
   cursor: pointer;
-}
-
-.modal {
-  position: relative;
-  z-index: 1;
-  background-color: var(--color-surface-elevated);
-  border-radius: var(--radius-lg);
-  padding: var(--space-4);
-  min-width: 20rem;
-  max-width: min(90vw, 32rem);
-  max-height: 85vh;
-  overflow-y: auto;
-}
-
-.modal__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
-  margin-bottom: var(--space-3);
-}
-
-.modal__title {
-  font-family: var(--font-family-base);
-  font-size: var(--font-size-h5);
-  font-weight: var(--font-weight-h5);
-  color: var(--color-text-primary);
-  margin: 0;
-}
-
-.modal__close {
-  background: none;
-  border: none;
-  font-size: var(--font-size-h5);
-  line-height: 1;
-  color: var(--color-text-secondary);
-  cursor: pointer;
-  padding: var(--space-1);
-
-  &:hover {
-    color: var(--color-text-primary);
-  }
-}
-
-.modal__body {
-  font-family: var(--font-family-base);
-  font-size: var(--font-size-body-md);
-  color: var(--color-text-primary);
-}
-
-// Buttons projected via `[modal-actions]`. Hidden when nothing is projected so
-// a modal without actions gets no extra spacing.
-.modal__footer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-top: var(--space-4);
-
-  &:empty {
-    display: none;
-  }
-
-  &--start {
-    justify-content: flex-start;
-  }
-
-  &--center {
-    justify-content: center;
-  }
-
-  &--end {
-    justify-content: flex-end;
-  }
 }

@@ -18,6 +18,14 @@ worked reference files called out below rather than inventing a new one.
     guards, the global `ErrorHandler`. Also `core/models/` (shared interfaces) and `core/http/`
     (small `HttpContextToken` helpers). Nothing here is imported by a feature more than once —
     if it needs to be instantiated per-use, it doesn't belong in `core/`.
+    `core/services/`, `core/guards/`, and `core/interceptors/` are each one folder per unit
+    (e.g. `core/services/modal/modal.service.ts`, `core/guards/auth/auth.guard.ts`,
+    `core/interceptors/error/error.interceptor.ts`), same shape as `shared/components/` below —
+    the folder is named after the unit with its `.service`/`.guard`/`.interceptor` suffix
+    dropped, and any files it collaborates with (a `-ref` class, injection tokens, etc. — see
+    `services/modal/`) live alongside it in that folder. `core/http/` and `core/models/` stay
+    flat — small token helpers and plain interfaces with no spec companion, not one-per-file
+    units.
   - `shared/` — `components/` (one folder per component), `pipes/`, `services/` (non-singleton,
     reusable utilities — currently an empty scaffold), and `utils/` (pure helper functions, e.g.
     `control-error-messages.ts`, that don't warrant a class).

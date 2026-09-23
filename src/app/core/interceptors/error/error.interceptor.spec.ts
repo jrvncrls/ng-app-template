@@ -4,9 +4,9 @@ import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { Observable, of, throwError } from 'rxjs';
 
-import { NotificationService } from '../services/notification.service';
-import { TokenRefreshService } from '../services/token-refresh.service';
-import { TokenStorageService } from '../services/token-storage.service';
+import { NotificationService } from '../../services/notification/notification.service';
+import { TokenRefreshService } from '../../services/token-refresh/token-refresh.service';
+import { TokenStorageService } from '../../services/token-storage/token-storage.service';
 import { errorInterceptor } from './error.interceptor';
 
 // Reference spec: demonstrates testing the 401 → refresh → queue → retry

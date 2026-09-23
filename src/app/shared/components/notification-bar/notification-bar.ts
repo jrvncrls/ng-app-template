@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 
-import { NotificationService, NotificationType } from '../../../core/services/notification.service';
+import {
+  NotificationService,
+  NotificationType,
+} from '../../../core/services/notification/notification.service';
 
 @Component({
   selector: 'app-notification-bar',
