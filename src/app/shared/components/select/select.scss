@@ -15,7 +15,18 @@
   color: var(--color-text-secondary);
 }
 
-.select__field {
+.select__control {
+  position: relative;
+}
+
+.select__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  width: 100%;
+  min-height: var(--control-height-md);
+  text-align: left;
   font-family: var(--font-family-base);
   font-size: var(--font-size-body-md);
   color: var(--color-text-primary);
@@ -24,10 +35,19 @@
   border-radius: var(--radius-md);
   padding: var(--space-2) var(--space-3);
   outline: none;
-  transition: border-color 0.15s ease;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 
-  &:focus {
+  &:hover:not(:disabled) {
+    border-color: var(--color-border-strong);
+  }
+
+  &:focus-visible,
+  &--open {
     border-color: var(--color-primary);
+    box-shadow: 0 0 0 var(--border-width-medium) var(--color-focus-ring);
   }
 
   &:disabled {
@@ -39,6 +59,110 @@
   &--invalid {
     border-color: var(--color-error);
   }
+}
+
+.select__value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &--placeholder {
+    color: var(--color-text-disabled);
+  }
+}
+
+.select__chevron {
+  flex: none;
+  color: var(--color-text-secondary);
+  transition: transform 0.15s ease;
+
+  .select__trigger--open & {
+    transform: rotate(180deg);
+  }
+}
+
+.select__trigger--clearable .select__value {
+  // Leave room for the clear button that sits over the trigger.
+  margin-right: var(--space-6);
+}
+
+.select__clear {
+  position: absolute;
+  top: 50%;
+  // Sits just left of the chevron: trigger padding + chevron width + gap.
+  right: calc(var(--space-3) + 1em + var(--space-1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50%);
+  font-size: var(--font-size-body-md);
+  color: var(--color-text-secondary);
+  background: none;
+  border: 0;
+  border-radius: var(--radius-full);
+  padding: var(--space-1);
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+
+  &:hover {
+    color: var(--color-text-primary);
+    background-color: var(--color-surface-sunken);
+  }
+
+  &:focus-visible {
+    outline: var(--border-width-medium) solid var(--color-focus-ring);
+  }
+}
+
+.select__panel {
+  // Positioned by the CDK overlay (flips above the trigger when there's no
+  // room below); the vertical margin gives the gap in either direction.
+  max-height: 15rem;
+  overflow-y: auto;
+  margin: var(--space-1) 0;
+  // Vertical padding only, so options run edge to edge like the trigger does.
+  padding: var(--space-1) 0;
+  box-sizing: border-box;
+  width: 100%;
+  list-style: none;
+  background-color: var(--color-surface);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 var(--space-2) var(--space-4) hsla(0, 0%, 0%, 0.12);
+}
+
+.select__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-body-md);
+  color: var(--color-text-primary);
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: var(--space-2) var(--space-3);
+  cursor: pointer;
+
+  &--active {
+    background-color: var(--color-surface-sunken);
+  }
+
+  &--selected {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+}
+
+.select__check {
+  flex: none;
 }
 
 .select__error {

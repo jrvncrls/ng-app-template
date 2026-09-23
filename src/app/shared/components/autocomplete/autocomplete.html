@@ -1,45 +1,92 @@
-<label class="autocomplete">
+<div class="autocomplete">
   @if (label()) {
-    <span class="autocomplete__label">
+    <label class="autocomplete__label" [for]="inputId">
       {{ label() }}
       @if (isRequired()) {
         <span class="text-error" aria-hidden="true">*</span>
       }
-    </span>
+    </label>
   }
 
-  <div class="autocomplete__control">
+  <div
+    class="autocomplete__control"
+    cdkOverlayOrigin
+    #origin="cdkOverlayOrigin"
+    (focusout)="handleFocusOut($event)"
+  >
     <input
+      #input
       class="autocomplete__field"
+      [class.autocomplete__field--clearable]="showClear()"
       [class.autocomplete__field--invalid]="errorMessage()"
+      [id]="inputId"
       type="text"
+      role="combobox"
+      autocomplete="off"
+      aria-autocomplete="list"
+      aria-haspopup="listbox"
+      [attr.aria-expanded]="showPanel()"
+      [attr.aria-controls]="showPanel() ? listboxId : null"
+      [attr.aria-activedescendant]="
+        showPanel() && activeIndex() >= 0 ? optionId(activeIndex()) : null
+      "
       [placeholder]="placeholder()"
       [disabled]="disabled()"
       [attr.aria-required]="isRequired() || null"
-      [value]="value()"
+      [value]="query()"
       (input)="handleInput($any($event.target).value)"
       (focus)="handleFocus()"
-      (blur)="handleBlur()"
+      (click)="handleClick()"
+      (keydown)="handleKeydown($event)"
     />
 
-    @if (open() && filteredOptions().length > 0) {
-      <ul class="autocomplete__panel">
-        @for (option of filteredOptions(); track option.value) {
-          <li>
+    @if (showClear()) {
+      <button
+        type="button"
+        class="autocomplete__clear"
+        [attr.aria-label]="clearLabel()"
+        (mousedown)="$event.preventDefault()"
+        (click)="clear()"
+      >
+        <i class="uil uil-times" aria-hidden="true"></i>
+      </button>
+    }
+
+    <ng-template
+      cdkConnectedOverlay
+      [cdkConnectedOverlayOrigin]="origin"
+      [cdkConnectedOverlayOpen]="showPanel()"
+      [cdkConnectedOverlayPositions]="positions"
+      [cdkConnectedOverlayWidth]="origin.elementRef.nativeElement.offsetWidth"
+    >
+      <ul
+        class="autocomplete__panel"
+        role="listbox"
+        [id]="listboxId"
+        (mousedown)="$event.preventDefault()"
+      >
+        @for (option of filteredOptions(); track option.value; let i = $index) {
+          <li role="presentation">
             <button
               type="button"
+              role="option"
+              tabindex="-1"
               class="autocomplete__option"
-              (mousedown)="$event.preventDefault(); selectOption(option)"
+              [id]="optionId(i)"
+              [class.autocomplete__option--active]="i === activeIndex()"
+              [attr.aria-selected]="i === activeIndex()"
+              (click)="selectOption(option)"
+              (mouseenter)="activeIndex.set(i)"
             >
               {{ option.label }}
             </button>
           </li>
         }
       </ul>
-    }
+    </ng-template>
   </div>
 
   @if (errorMessage(); as message) {
     <span class="autocomplete__error">{{ message }}</span>
   }
-</label>
+</div>
