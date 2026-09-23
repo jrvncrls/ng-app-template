@@ -16,7 +16,11 @@ import { Button } from '../../shared/components/button/button';
   template: `
     <p class="text-body-md-regular">Discard your changes to this profile?</p>
     <div class="d-flex justify-content-end gap-2 mt-4">
-      <app-button testId="showcase-confirm-keep" variant="ghost" (click)="modalRef.close(false)">
+      <app-button
+        testId="showcase-confirm-keep"
+        variant="secondary"
+        (click)="modalRef.close(false)"
+      >
         Keep editing
       </app-button>
       <app-button testId="showcase-confirm-discard" variant="danger" (click)="modalRef.close(true)">

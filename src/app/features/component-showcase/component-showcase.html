@@ -9,7 +9,6 @@
     <div class="showcase__row">
       <app-button testId="showcase-button-primary" variant="primary">Primary</app-button>
       <app-button testId="showcase-button-secondary" variant="secondary">Secondary</app-button>
-      <app-button testId="showcase-button-ghost" variant="ghost">Ghost</app-button>
       <app-button testId="showcase-button-danger" variant="danger">Danger</app-button>
       <app-button testId="showcase-button-disabled" [disabled]="true">Disabled</app-button>
     </div>
@@ -104,7 +103,7 @@
       <app-button testId="showcase-notify-warning" variant="secondary" (click)="notifyWarning()">
         Warning
       </app-button>
-      <app-button testId="showcase-notify-info" variant="ghost" (click)="notifyInfo()">
+      <app-button testId="showcase-notify-info" variant="secondary" (click)="notifyInfo()">
         Info
       </app-button>
     </div>
