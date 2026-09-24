@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, input, model } from '@angular/core'
 export type ModalActionsAlign = 'start' | 'center' | 'end';
 
 @Component({
-  selector: 'app-modal',
+  selector: 'techyon-modal',
   standalone: true,
   templateUrl: './modal.html',
   styleUrl: './modal.scss',

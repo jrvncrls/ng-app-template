@@ -44,7 +44,7 @@ const PATIENTS = ['Kim Douglas', 'Carol Miller', 'Chris Washington', 'Joshua Lon
 // actually visible. Route it in only under a dev-only path; never link to it
 // from product navigation.
 @Component({
-  selector: 'app-component-showcase',
+  selector: 'techyon-component-showcase',
   standalone: true,
   imports: [
     CurrencyPipe,

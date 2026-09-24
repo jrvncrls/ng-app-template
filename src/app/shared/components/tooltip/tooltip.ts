@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core
 export type TooltipPosition = 'top' | 'bottom' | 'left' | 'right';
 
 @Component({
-  selector: 'app-tooltip',
+  selector: 'techyon-tooltip',
   standalone: true,
   templateUrl: './tooltip.html',
   styleUrl: './tooltip.scss',

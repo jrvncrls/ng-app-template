@@ -5,7 +5,7 @@ import { LoadingService } from './core/services/loading/loading.service';
 import { NotificationBar } from './shared/components/notification-bar/notification-bar';
 
 @Component({
-  selector: 'app-root',
+  selector: 'techyon-root',
   standalone: true,
   imports: [RouterOutlet, NotificationBar],
   templateUrl: './app.html',

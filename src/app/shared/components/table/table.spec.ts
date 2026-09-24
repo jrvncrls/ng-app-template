@@ -22,7 +22,7 @@ const PEOPLE: Person[] = [
   imports: [Table, TableCell],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <app-table
+    <techyon-table
       testId="people"
       [columns]="columns"
       [data]="data()"
@@ -37,10 +37,10 @@ const PEOPLE: Person[] = [
       [clickableRows]="true"
       (rowClick)="clicked.set($event)"
     >
-      <ng-template appTableCell="name" let-row let-value="value">
+      <ng-template techyonTableCell="name" let-row let-value="value">
         <strong class="custom">{{ value }} #{{ row.id }}</strong>
       </ng-template>
-    </app-table>
+    </techyon-table>
   `,
 })
 class TestHost {

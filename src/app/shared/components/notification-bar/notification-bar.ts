@@ -6,7 +6,7 @@ import {
 } from '../../../core/services/notification/notification.service';
 
 @Component({
-  selector: 'app-notification-bar',
+  selector: 'techyon-notification-bar',
   standalone: true,
   templateUrl: './notification-bar.html',
   styleUrl: './notification-bar.scss',

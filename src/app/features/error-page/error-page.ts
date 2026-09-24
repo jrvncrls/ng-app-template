@@ -12,7 +12,7 @@ const ERROR_MESSAGES: Record<string, string> = {
 const DEFAULT_MESSAGE = 'An unexpected error occurred.';
 
 @Component({
-  selector: 'app-error-page',
+  selector: 'techyon-error-page',
   standalone: true,
   templateUrl: './error-page.html',
   styleUrl: './error-page.scss',

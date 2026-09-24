@@ -7,7 +7,7 @@ import { Portal, PortalModule } from '@angular/cdk/portal';
  * template. For a modal declared in a template, use `Modal` instead.
  */
 @Component({
-  selector: 'app-modal-host',
+  selector: 'techyon-modal-host',
   standalone: true,
   imports: [PortalModule],
   templateUrl: './modal-host.html',

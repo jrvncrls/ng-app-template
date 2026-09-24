@@ -7,7 +7,7 @@ import { Pagination } from './pagination';
   standalone: true,
   imports: [Pagination],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `<app-pagination
+  template: `<techyon-pagination
     testId="pager"
     [total]="total()"
     [(page)]="page"

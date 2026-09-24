@@ -18,18 +18,26 @@ export interface ShowcaseFormResult {
  * a second modal on top (the discard-changes confirm).
  */
 @Component({
-  selector: 'app-showcase-form-modal',
+  selector: 'techyon-showcase-form-modal',
   standalone: true,
   imports: [ReactiveFormsModule, Button, InputText],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <form [formGroup]="form" (ngSubmit)="save()">
-      <app-input-text testId="showcase-service-modal-name" label="Name" formControlName="name" />
+      <techyon-input-text
+        testId="showcase-service-modal-name"
+        label="Name"
+        formControlName="name"
+      />
       <div class="d-flex justify-content-end gap-2 mt-4">
-        <app-button testId="showcase-service-modal-discard" variant="secondary" (click)="discard()">
+        <techyon-button
+          testId="showcase-service-modal-discard"
+          variant="secondary"
+          (click)="discard()"
+        >
           Cancel
-        </app-button>
-        <app-button testId="showcase-service-modal-save" type="submit">Save</app-button>
+        </techyon-button>
+        <techyon-button testId="showcase-service-modal-save" type="submit">Save</techyon-button>
       </div>
     </form>
   `,

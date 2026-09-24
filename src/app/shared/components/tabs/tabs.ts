@@ -9,7 +9,7 @@ export interface TabItem {
 // `[(activeId)]`) to decide which panel to show in the projected content —
 // keeps this component from having to know anything about panel content.
 @Component({
-  selector: 'app-tabs',
+  selector: 'techyon-tabs',
   standalone: true,
   templateUrl: './tabs.html',
   styleUrl: './tabs.scss',

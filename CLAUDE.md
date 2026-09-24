@@ -37,6 +37,9 @@ worked reference files called out below rather than inventing a new one.
   `AppComponent`). Services keep the `Service` suffix (`LoadingService`). Guards and
   interceptors are camelCase functions with a `Guard`/`Interceptor` suffix (`authGuard`,
   `errorInterceptor`). Pipes are `XyzPipe` classes with a camelCase `name` in the decorator.
+- **Selector prefix:** `techyon`. Component selectors are kebab-case (`techyon-button`, `techyon-input-text`) and
+  directive selectors camelCase (`techyonTableCell`). It's set in `angular.json` (`prefix`) and enforced
+  by the `component-selector`/`directive-selector` rules in `eslint.config.js`.
 
 ## Design tokens (`src/styles/`)
 
@@ -90,12 +93,12 @@ Stacking order (`styles/tokens/_z-index.scss`) follows the same pattern: one `$z
 file, Bootstrap-style — starting at 1000 with 10-20 point gaps so a new layer can be inserted
 later without renumbering everything else. Component SCSS must reference `var(--z-*)` rather than
 hardcode a number, so the relative order between layers can't drift out of sync across files. A
-`z-index` used only for *local* stacking within a component's own stacking context (not competing
+`z-index` used only for _local_ stacking within a component's own stacking context (not competing
 with another layer) isn't on this scale — e.g. `Modal`'s inner `.modal` panel sitting above its
 own backdrop-dismiss button.
 
 `ModalService` (CDK Overlay) modals aren't on this scale either — CDK's own `.cdk-overlay-container`
-defaults to `z-index: 1000`, which would otherwise land *inside* this range instead of above it,
+defaults to `z-index: 1000`, which would otherwise land _inside_ this range instead of above it,
 so `styles/overlay.scss` raises it to `1100` to keep CDK modals always on top of every layer here
 (the same relative order this scale had before its own numbers were pushed up to the 1000s).
 
@@ -151,7 +154,7 @@ Every component:
 
 `Table<T>` is column-config driven (`columns: TableColumn<T>[]`, `data: T[]`), not mat-table-style
 directive markup. Every option other than those two and `testId` has a default. Override a column's
-rendering with `<ng-template appTableCell="key" let-row let-value="value">` (`TableCell`), not by
+rendering with `<ng-template techyonTableCell="key" let-row let-value="value">` (`TableCell`), not by
 adding per-column inputs.
 
 - **Sorting/paging are client-side by default.** The table sorts `data`, then slices to
@@ -221,7 +224,7 @@ this.notify.error('Could not save.', { duration: 6000, position: 'bottom' });
 ```
 
 `duration` (ms, default 4000, `0` disables auto-dismiss) and `position` (`'top' | 'bottom'`,
-default `'top'`) are optional per call. `<app-notification-bar testId="app-notifications" />` is
+default `'top'`) are optional per call. `<techyon-notification-bar testId="app-notifications" />` is
 mounted once in `app.html` and renders the full stack (multiple notifications visible at once),
 split into a top and bottom container.
 

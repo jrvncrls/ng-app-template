@@ -29,7 +29,7 @@ export interface AutocompleteOption {
 let nextId = 0;
 
 @Component({
-  selector: 'app-autocomplete',
+  selector: 'techyon-autocomplete',
   standalone: true,
   imports: [CdkConnectedOverlay, CdkOverlayOrigin],
   templateUrl: './autocomplete.html',

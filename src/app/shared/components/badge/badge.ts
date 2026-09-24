@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 export type BadgeStatus = 'default' | 'active' | 'suspended' | 'declined' | 'completed';
 
 @Component({
-  selector: 'app-badge',
+  selector: 'techyon-badge',
   standalone: true,
   templateUrl: './badge.html',
   styleUrl: './badge.scss',

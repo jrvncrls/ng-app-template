@@ -10,7 +10,7 @@
       <tr>
         @if (selectable()) {
           <th class="table__cell table__cell--head table__cell--select" scope="col">
-            <app-checkbox
+            <techyon-checkbox
               [testId]="testId() + '-select-all'"
               [ariaLabel]="selectAllLabel()"
               [value]="allSelected()"
@@ -66,7 +66,7 @@
           >
             @if (selectable()) {
               <td class="table__cell table__cell--select" (click)="$event.stopPropagation()">
-                <app-checkbox
+                <techyon-checkbox
                   [testId]="testId() + '-select-' + index"
                   [ariaLabel]="selectRowLabel()"
                   [value]="isSelected(row)"

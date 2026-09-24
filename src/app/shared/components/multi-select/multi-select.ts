@@ -28,7 +28,7 @@ export interface MultiSelectOption {
 let nextId = 0;
 
 @Component({
-  selector: 'app-multi-select',
+  selector: 'techyon-multi-select',
   standalone: true,
   imports: [CdkConnectedOverlay, CdkOverlayOrigin],
   templateUrl: './multi-select.html',

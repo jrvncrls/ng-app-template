@@ -5,7 +5,7 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonType = 'button' | 'submit' | 'reset';
 
 @Component({
-  selector: 'app-button',
+  selector: 'techyon-button',
   standalone: true,
   templateUrl: './button.html',
   styleUrl: './button.scss',

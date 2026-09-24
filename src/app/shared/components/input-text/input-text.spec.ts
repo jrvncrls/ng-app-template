@@ -35,8 +35,8 @@ describe('InputText', () => {
       standalone: true,
       imports: [InputText, ReactiveFormsModule],
       template: `
-        <app-input-text testId="required" label="Email" [formControl]="requiredControl" />
-        <app-input-text testId="optional" label="Nickname" [formControl]="optionalControl" />
+        <techyon-input-text testId="required" label="Email" [formControl]="requiredControl" />
+        <techyon-input-text testId="optional" label="Nickname" [formControl]="optionalControl" />
       `,
     })
     class HostComponent {
@@ -49,7 +49,7 @@ describe('InputText', () => {
       fixture.detectChanges();
 
       const [requiredField, optionalField] =
-        fixture.nativeElement.querySelectorAll('app-input-text');
+        fixture.nativeElement.querySelectorAll('techyon-input-text');
       expect(requiredField.querySelector('.text-error')?.textContent).toBe('*');
       expect(requiredField.querySelector('input').getAttribute('aria-required')).toBe('true');
       expect(optionalField.querySelector('.text-error')).toBeNull();
@@ -122,7 +122,7 @@ describe('InputText', () => {
     @Component({
       standalone: true,
       imports: [InputText, ReactiveFormsModule],
-      template: `<app-input-text testId="email" [formControl]="control" />`,
+      template: `<techyon-input-text testId="email" [formControl]="control" />`,
     })
     class HostComponent {
       readonly control = new FormControl('', {
@@ -148,7 +148,7 @@ describe('InputText', () => {
       @Component({
         standalone: true,
         imports: [InputText, ReactiveFormsModule],
-        template: `<app-input-text
+        template: `<techyon-input-text
           testId="email"
           [formControl]="control"
           [errorMessages]="{ required: 'Email is mandatory.' }"

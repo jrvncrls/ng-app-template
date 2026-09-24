@@ -17,7 +17,7 @@ import { isControlRequired } from '../../utils/control-required';
 export type InputTextType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
 
 @Component({
-  selector: 'app-input-text',
+  selector: 'techyon-input-text',
   standalone: true,
   templateUrl: './input-text.html',
   styleUrl: './input-text.scss',

@@ -59,7 +59,7 @@ function compareValues(a: unknown, b: unknown, sign: 1 | -1): number {
 }
 
 @Component({
-  selector: 'app-table',
+  selector: 'techyon-table',
   standalone: true,
   imports: [Checkbox, NgTemplateOutlet],
   templateUrl: './table.html',
@@ -90,7 +90,7 @@ export class Table<T> {
    * given and `sort` only reports what was asked for. Otherwise the table sorts `data` itself.
    */
   readonly serverSide = input(false, { transform: booleanAttribute });
-  /** Client-side paging, alongside `<app-pagination>`. Leave `pageSize` unset to show every row. */
+  /** Client-side paging, alongside `<techyon-pagination>`. Leave `pageSize` unset to show every row. */
   readonly page = input(1, { transform: numberAttribute });
   readonly pageSize = input<number | null>(null);
 

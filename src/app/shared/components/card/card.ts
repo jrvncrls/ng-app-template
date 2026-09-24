@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
-  selector: 'app-card',
+  selector: 'techyon-card',
   standalone: true,
   templateUrl: './card.html',
   styleUrl: './card.scss',

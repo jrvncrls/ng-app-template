@@ -5,58 +5,62 @@
   </p>
 
   <!-- Button -->
-  <app-card testId="showcase-card-button" title="Button">
+  <techyon-card testId="showcase-card-button" title="Button">
     <div class="showcase__row">
-      <app-button testId="showcase-button-primary" variant="primary">Primary</app-button>
-      <app-button testId="showcase-button-secondary" variant="secondary">Secondary</app-button>
-      <app-button testId="showcase-button-danger" variant="danger">Danger</app-button>
-      <app-button testId="showcase-button-disabled" [disabled]="true">Disabled</app-button>
+      <techyon-button testId="showcase-button-primary" variant="primary">Primary</techyon-button>
+      <techyon-button testId="showcase-button-secondary" variant="secondary"
+        >Secondary</techyon-button
+      >
+      <techyon-button testId="showcase-button-danger" variant="danger">Danger</techyon-button>
+      <techyon-button testId="showcase-button-disabled" [disabled]="true">Disabled</techyon-button>
     </div>
     <div class="showcase__row">
-      <app-button testId="showcase-button-sm" size="sm">Small</app-button>
-      <app-button testId="showcase-button-md" size="md">Medium</app-button>
-      <app-button testId="showcase-button-lg" size="lg">Large</app-button>
+      <techyon-button testId="showcase-button-sm" size="sm">Small</techyon-button>
+      <techyon-button testId="showcase-button-md" size="md">Medium</techyon-button>
+      <techyon-button testId="showcase-button-lg" size="lg">Large</techyon-button>
     </div>
-    <app-button testId="showcase-button-block" [block]="true">Full-width</app-button>
-  </app-card>
+    <techyon-button testId="showcase-button-block" [block]="true">Full-width</techyon-button>
+  </techyon-card>
 
   <!-- Badge -->
-  <app-card testId="showcase-card-badge" title="Badge">
+  <techyon-card testId="showcase-card-badge" title="Badge">
     <div class="showcase__row">
       @for (status of badgeStatuses; track status) {
-        <app-badge [testId]="'showcase-badge-' + status" [status]="status">{{ status }}</app-badge>
+        <techyon-badge [testId]="'showcase-badge-' + status" [status]="status">{{
+          status
+        }}</techyon-badge>
       }
     </div>
-  </app-card>
+  </techyon-card>
 
   <!-- Loader -->
-  <app-card testId="showcase-card-loader" title="Loader">
+  <techyon-card testId="showcase-card-loader" title="Loader">
     <div class="showcase__row showcase__row--center">
-      <app-loader testId="showcase-loader-sm" size="sm" />
-      <app-loader testId="showcase-loader-md" size="md" />
-      <app-loader testId="showcase-loader-lg" size="lg" />
+      <techyon-loader testId="showcase-loader-sm" size="sm" />
+      <techyon-loader testId="showcase-loader-md" size="md" />
+      <techyon-loader testId="showcase-loader-lg" size="lg" />
     </div>
-  </app-card>
+  </techyon-card>
 
   <!-- Tooltip -->
-  <app-card testId="showcase-card-tooltip" title="Tooltip">
+  <techyon-card testId="showcase-card-tooltip" title="Tooltip">
     <div class="showcase__row">
-      <app-tooltip testId="showcase-tooltip-top" text="Top tooltip" position="top">
-        <app-button testId="showcase-tooltip-top-trigger" variant="secondary"
-          >Hover (top)</app-button
+      <techyon-tooltip testId="showcase-tooltip-top" text="Top tooltip" position="top">
+        <techyon-button testId="showcase-tooltip-top-trigger" variant="secondary"
+          >Hover (top)</techyon-button
         >
-      </app-tooltip>
-      <app-tooltip testId="showcase-tooltip-bottom" text="Bottom tooltip" position="bottom">
-        <app-button testId="showcase-tooltip-bottom-trigger" variant="secondary"
-          >Hover (bottom)</app-button
+      </techyon-tooltip>
+      <techyon-tooltip testId="showcase-tooltip-bottom" text="Bottom tooltip" position="bottom">
+        <techyon-button testId="showcase-tooltip-bottom-trigger" variant="secondary"
+          >Hover (bottom)</techyon-button
         >
-      </app-tooltip>
+      </techyon-tooltip>
     </div>
-  </app-card>
+  </techyon-card>
 
   <!-- Tabs -->
-  <app-card testId="showcase-card-tabs" title="Tabs">
-    <app-tabs testId="showcase-tabs" [tabs]="tabItems" [(activeId)]="activeTabId">
+  <techyon-card testId="showcase-card-tabs" title="Tabs">
+    <techyon-tabs testId="showcase-tabs" [tabs]="tabItems" [(activeId)]="activeTabId">
       @switch (activeTabId()) {
         @case ('first') {
           <p class="text-body-md-regular">Content for the first tab.</p>
@@ -68,12 +72,12 @@
           <p class="text-body-md-regular">Content for the third tab.</p>
         }
       }
-    </app-tabs>
-  </app-card>
+    </techyon-tabs>
+  </techyon-card>
 
   <!-- Table + Pagination -->
-  <app-card testId="showcase-card-table" title="Table + Pagination">
-    <app-table
+  <techyon-card testId="showcase-card-table" title="Table + Pagination">
+    <techyon-table
       testId="showcase-table"
       ariaLabel="Payment plans"
       [columns]="planColumns"
@@ -84,68 +88,79 @@
       [page]="planPage()"
       [pageSize]="planPageSize()"
     >
-      <ng-template appTableCell="id" let-value="value">
+      <ng-template techyonTableCell="id" let-value="value">
         <strong>{{ value }}</strong>
       </ng-template>
-      <ng-template appTableCell="amount" let-value="value">
+      <ng-template techyonTableCell="amount" let-value="value">
         {{ value | currency: 'USD' : 'symbol' : '1.0-0' }}
       </ng-template>
-    </app-table>
-    <app-pagination
+    </techyon-table>
+    <techyon-pagination
       testId="showcase-pagination"
       [total]="plans.length"
       [(page)]="planPage"
       [(pageSize)]="planPageSize"
     />
     <p class="text-body-sm-regular">{{ selectedPlans().length }} selected</p>
-  </app-card>
+  </techyon-card>
 
   <!-- Modal -->
-  <app-card testId="showcase-card-modal" title="Modal">
-    <app-button testId="showcase-modal-trigger" (click)="modalOpen.set(true)"
-      >Open modal</app-button
+  <techyon-card testId="showcase-card-modal" title="Modal">
+    <techyon-button testId="showcase-modal-trigger" (click)="modalOpen.set(true)"
+      >Open modal</techyon-button
     >
-    <app-modal testId="showcase-modal" title="Showcase modal" [(open)]="modalOpen">
+    <techyon-modal testId="showcase-modal" title="Showcase modal" [(open)]="modalOpen">
       <p class="text-body-md-regular">This is the modal body content.</p>
       <div modal-actions>
-        <app-button testId="showcase-modal-close" (click)="modalOpen.set(false)">Close</app-button>
+        <techyon-button testId="showcase-modal-close" (click)="modalOpen.set(false)"
+          >Close</techyon-button
+        >
       </div>
-    </app-modal>
-  </app-card>
+    </techyon-modal>
+  </techyon-card>
 
   <!-- ModalService: service-driven, stackable modal (a form modal that can itself open a confirm modal on top) -->
-  <app-card testId="showcase-card-modal-service" title="Modal (service, stacked)">
-    <app-button testId="showcase-service-modal-trigger" (click)="openServiceModal()">
+  <techyon-card testId="showcase-card-modal-service" title="Modal (service, stacked)">
+    <techyon-button testId="showcase-service-modal-trigger" (click)="openServiceModal()">
       Open via ModalService
-    </app-button>
-  </app-card>
+    </techyon-button>
+  </techyon-card>
 
   <!-- Notification -->
-  <app-card testId="showcase-card-notification" title="Notification">
+  <techyon-card testId="showcase-card-notification" title="Notification">
     <div class="showcase__row">
-      <app-button testId="showcase-notify-success" variant="primary" (click)="notifySuccess()">
+      <techyon-button testId="showcase-notify-success" variant="primary" (click)="notifySuccess()">
         Success
-      </app-button>
-      <app-button testId="showcase-notify-error" variant="danger" (click)="notifyError()">
+      </techyon-button>
+      <techyon-button testId="showcase-notify-error" variant="danger" (click)="notifyError()">
         Error
-      </app-button>
-      <app-button testId="showcase-notify-warning" variant="secondary" (click)="notifyWarning()">
+      </techyon-button>
+      <techyon-button
+        testId="showcase-notify-warning"
+        variant="secondary"
+        (click)="notifyWarning()"
+      >
         Warning
-      </app-button>
-      <app-button testId="showcase-notify-info" variant="secondary" (click)="notifyInfo()">
+      </techyon-button>
+      <techyon-button testId="showcase-notify-info" variant="secondary" (click)="notifyInfo()">
         Info
-      </app-button>
+      </techyon-button>
     </div>
-  </app-card>
+  </techyon-card>
 
   <!-- Form-capable components, bound to a real reactive form so validation states are visible -->
-  <app-card testId="showcase-card-form" title="Form controls">
+  <techyon-card testId="showcase-card-form" title="Form controls">
     <form class="showcase__form" [formGroup]="form" (ngSubmit)="submitForm()">
-      <app-input-text testId="showcase-input-name" label="Name" formControlName="name" />
+      <techyon-input-text testId="showcase-input-name" label="Name" formControlName="name" />
 
-      <app-textarea testId="showcase-textarea-bio" label="Bio" formControlName="bio" [rows]="3" />
+      <techyon-textarea
+        testId="showcase-textarea-bio"
+        label="Bio"
+        formControlName="bio"
+        [rows]="3"
+      />
 
-      <app-select
+      <techyon-select
         testId="showcase-select-color"
         label="Favorite color"
         [options]="selectOptions"
@@ -153,7 +168,7 @@
         formControlName="color"
       />
 
-      <app-multi-select
+      <techyon-multi-select
         testId="showcase-multi-select-frameworks"
         label="Frameworks you know"
         [options]="multiSelectOptions"
@@ -161,7 +176,7 @@
         formControlName="frameworks"
       />
 
-      <app-autocomplete
+      <techyon-autocomplete
         testId="showcase-autocomplete-fruit"
         label="Favorite fruit"
         [options]="autocompleteOptions"
@@ -169,22 +184,26 @@
         formControlName="fruit"
       />
 
-      <app-radio
+      <techyon-radio
         testId="showcase-radio-size"
         label="Size"
         [options]="radioOptions"
         formControlName="size"
       />
 
-      <app-checkbox
+      <techyon-checkbox
         testId="showcase-checkbox-terms"
         label="I agree to the terms"
         formControlName="agreeToTerms"
       />
 
-      <app-toggle testId="showcase-toggle-notify" label="Notify me" formControlName="notifyMe" />
+      <techyon-toggle
+        testId="showcase-toggle-notify"
+        label="Notify me"
+        formControlName="notifyMe"
+      />
 
-      <app-button testId="showcase-form-submit" type="submit">Submit</app-button>
+      <techyon-button testId="showcase-form-submit" type="submit">Submit</techyon-button>
     </form>
-  </app-card>
+  </techyon-card>
 </div>

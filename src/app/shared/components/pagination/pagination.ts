@@ -47,7 +47,7 @@ function buildItems(current: number, pageCount: number, siblings: number): Pagin
 }
 
 @Component({
-  selector: 'app-pagination',
+  selector: 'techyon-pagination',
   standalone: true,
   imports: [Select],
   templateUrl: './pagination.html',

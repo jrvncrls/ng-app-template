@@ -30,7 +30,7 @@ export interface SelectOption {
 let nextId = 0;
 
 @Component({
-  selector: 'app-select',
+  selector: 'techyon-select',
   standalone: true,
   imports: [CdkConnectedOverlay, CdkOverlayOrigin],
   templateUrl: './select.html',

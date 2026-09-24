@@ -9,23 +9,27 @@ import { Button } from '../../shared/components/button/button';
  * stacked on top of another already-open modal.
  */
 @Component({
-  selector: 'app-showcase-confirm-modal',
+  selector: 'techyon-showcase-confirm-modal',
   standalone: true,
   imports: [Button],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <p class="text-body-md-regular">Discard your changes to this profile?</p>
     <div class="d-flex justify-content-end gap-2 mt-4">
-      <app-button
+      <techyon-button
         testId="showcase-confirm-keep"
         variant="secondary"
         (click)="modalRef.close(false)"
       >
         Keep editing
-      </app-button>
-      <app-button testId="showcase-confirm-discard" variant="danger" (click)="modalRef.close(true)">
+      </techyon-button>
+      <techyon-button
+        testId="showcase-confirm-discard"
+        variant="danger"
+        (click)="modalRef.close(true)"
+      >
         Discard
-      </app-button>
+      </techyon-button>
     </div>
   `,
 })

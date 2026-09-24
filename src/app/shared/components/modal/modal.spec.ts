@@ -27,10 +27,10 @@ describe('Modal', () => {
       standalone: true,
       imports: [Modal],
       template: `
-        <app-modal testId="modal" title="Confirm" [open]="true">
+        <techyon-modal testId="modal" title="Confirm" [open]="true">
           <p>Body</p>
           <div modal-actions><button type="button">Save</button></div>
-        </app-modal>
+        </techyon-modal>
       `,
     })
     class DefaultHost {}
@@ -39,9 +39,9 @@ describe('Modal', () => {
       standalone: true,
       imports: [Modal],
       template: `
-        <app-modal testId="modal" title="Confirm" [open]="true" actionsAlign="center">
+        <techyon-modal testId="modal" title="Confirm" [open]="true" actionsAlign="center">
           <div modal-actions><button type="button">Save</button></div>
-        </app-modal>
+        </techyon-modal>
       `,
     })
     class CenteredHost {}

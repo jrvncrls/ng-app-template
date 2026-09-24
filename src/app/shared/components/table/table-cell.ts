@@ -13,17 +13,17 @@ export interface TableCellContext<T> {
  * Overrides how one column renders its cells:
  *
  * ```html
- * <ng-template appTableCell="status" let-row let-value="value">
- *   <app-badge [status]="value">{{ value }}</app-badge>
+ * <ng-template techyonTableCell="status" let-row let-value="value">
+ *   <techyon-badge [status]="value">{{ value }}</techyon-badge>
  * </ng-template>
  * ```
  */
 @Directive({
-  selector: 'ng-template[appTableCell]',
+  selector: 'ng-template[techyonTableCell]',
   standalone: true,
 })
 export class TableCell<T = unknown> {
   /** The `key` of the column this template renders. */
-  readonly columnKey = input.required<string>({ alias: 'appTableCell' });
+  readonly columnKey = input.required<string>({ alias: 'techyonTableCell' });
   readonly template = inject<TemplateRef<TableCellContext<T>>>(TemplateRef);
 }

@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 export type LoaderSize = 'sm' | 'md' | 'lg';
 
 @Component({
-  selector: 'app-loader',
+  selector: 'techyon-loader',
   standalone: true,
   templateUrl: './loader.html',
   styleUrl: './loader.scss',

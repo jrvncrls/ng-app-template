@@ -15,7 +15,7 @@ import { resolveErrorMessage } from '../../utils/control-error-messages';
 import { isControlRequired } from '../../utils/control-required';
 
 @Component({
-  selector: 'app-checkbox',
+  selector: 'techyon-checkbox',
   standalone: true,
   templateUrl: './checkbox.html',
   styleUrl: './checkbox.scss',

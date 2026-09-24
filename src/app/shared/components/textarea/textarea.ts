@@ -15,7 +15,7 @@ import { resolveErrorMessage } from '../../utils/control-error-messages';
 import { isControlRequired } from '../../utils/control-required';
 
 @Component({
-  selector: 'app-textarea',
+  selector: 'techyon-textarea',
   standalone: true,
   templateUrl: './textarea.html',
   styleUrl: './textarea.scss',

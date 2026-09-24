@@ -15,7 +15,7 @@ import { resolveErrorMessage } from '../../utils/control-error-messages';
 import { isControlRequired } from '../../utils/control-required';
 
 @Component({
-  selector: 'app-toggle',
+  selector: 'techyon-toggle',
   standalone: true,
   templateUrl: './toggle.html',
   styleUrl: './toggle.scss',

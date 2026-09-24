@@ -21,10 +21,10 @@ export interface RadioOption {
 
 let nextGroupId = 0;
 
-// One `<app-radio>` renders a whole radio group, backed by a single value —
+// One `<techyon-radio>` renders a whole radio group, backed by a single value —
 // not one component instance per option.
 @Component({
-  selector: 'app-radio',
+  selector: 'techyon-radio',
   standalone: true,
   templateUrl: './radio.html',
   styleUrl: './radio.scss',
