@@ -4,6 +4,8 @@
       class="checkbox__input"
       type="checkbox"
       [checked]="value()"
+      [indeterminate]="indeterminate()"
+      [attr.aria-label]="ariaLabel()"
       [disabled]="disabled()"
       (change)="handleChange($any($event.target).checked)"
       (blur)="handleBlur()"

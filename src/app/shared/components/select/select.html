@@ -18,6 +18,7 @@
       #trigger
       type="button"
       class="select__trigger"
+      [class.select__trigger--sm]="size() === 'sm'"
       [class.select__trigger--open]="open()"
       [class.select__trigger--clearable]="showClear()"
       [class.select__trigger--invalid]="errorMessage()"
@@ -59,6 +60,7 @@
     >
       <ul
         class="select__panel"
+        [class.select__panel--sm]="size() === 'sm'"
         role="listbox"
         [id]="listboxId"
         [attr.aria-labelledby]="label() ? labelId : null"

@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -15,13 +16,28 @@ import { InputText } from '../../shared/components/input-text/input-text';
 import { Loader } from '../../shared/components/loader/loader';
 import { Modal } from '../../shared/components/modal/modal';
 import { MultiSelect, MultiSelectOption } from '../../shared/components/multi-select/multi-select';
+import { Pagination } from '../../shared/components/pagination/pagination';
 import { Radio, RadioOption } from '../../shared/components/radio/radio';
 import { Select, SelectOption } from '../../shared/components/select/select';
+import { Table, TableColumn } from '../../shared/components/table/table';
+import { TableCell } from '../../shared/components/table/table-cell';
 import { Tabs, TabItem } from '../../shared/components/tabs/tabs';
 import { Textarea } from '../../shared/components/textarea/textarea';
 import { Toggle } from '../../shared/components/toggle/toggle';
 import { Tooltip } from '../../shared/components/tooltip/tooltip';
 import { ShowcaseFormModal, ShowcaseFormResult } from './showcase-form-modal';
+
+interface ShowcasePlan {
+  id: string;
+  planType: string;
+  doctor: string;
+  patient: string;
+  amount: number;
+}
+
+const PLAN_TYPES = ['BNPL', 'Plus', 'Pay In Full'];
+const DOCTORS = ['Jhaymar Belen', 'Michelle Cameron'];
+const PATIENTS = ['Kim Douglas', 'Carol Miller', 'Chris Washington', 'Joshua Long', 'Judy Parker'];
 
 // Not a real feature — a living catalog of every shared/components/* element,
 // each wired to something so its states (value, error, disabled, etc.) are
@@ -31,6 +47,7 @@ import { ShowcaseFormModal, ShowcaseFormResult } from './showcase-form-modal';
   selector: 'app-component-showcase',
   standalone: true,
   imports: [
+    CurrencyPipe,
     ReactiveFormsModule,
     Autocomplete,
     Badge,
@@ -41,8 +58,11 @@ import { ShowcaseFormModal, ShowcaseFormResult } from './showcase-form-modal';
     Loader,
     Modal,
     MultiSelect,
+    Pagination,
     Radio,
     Select,
+    Table,
+    TableCell,
     Tabs,
     Textarea,
     Toggle,
@@ -98,6 +118,27 @@ export class ComponentShowcase {
   ];
 
   protected readonly activeTabId = signal('first');
+
+  protected readonly planColumns: TableColumn<ShowcasePlan>[] = [
+    { key: 'id', header: 'DDR No', sortable: true },
+    { key: 'planType', header: 'Plan Type', sortable: true },
+    { key: 'doctor', header: 'Doctor Name', sortable: true },
+    { key: 'patient', header: 'Patient name', sortable: true },
+    { key: 'amount', header: 'Plan Amount', sortable: true, align: 'end' },
+  ];
+
+  protected readonly plans: ShowcasePlan[] = Array.from({ length: 200 }, (_, i) => ({
+    id: `DDR-${20202394 + i * 1117}`,
+    planType: PLAN_TYPES[i % PLAN_TYPES.length],
+    doctor: DOCTORS[i % DOCTORS.length],
+    patient: PATIENTS[i % PATIENTS.length],
+    amount: 1230 + ((i * 397) % 6700),
+  }));
+
+  protected readonly planRowKey = (plan: ShowcasePlan) => plan.id;
+  protected readonly planPage = signal(1);
+  protected readonly planPageSize = signal(8);
+  protected readonly selectedPlans = signal<ShowcasePlan[]>([]);
 
   protected readonly modalOpen = signal(false);
 

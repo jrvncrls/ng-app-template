@@ -20,6 +20,8 @@ import { resolveErrorMessage } from '../../utils/control-error-messages';
 import { isControlRequired } from '../../utils/control-required';
 import { DROPDOWN_POSITIONS } from '../../utils/dropdown-positions';
 
+export type SelectSize = 'sm' | 'md';
+
 export interface SelectOption {
   label: string;
   value: string;
@@ -48,6 +50,8 @@ export class Select implements ControlValueAccessor {
   /** Shows an (x) button that resets the value to `null` while something is selected. */
   readonly clearable = input(false, { transform: booleanAttribute });
   readonly clearLabel = input<string>('Clear selection');
+  /** `md` is at least 44px tall (the touch-target minimum); `sm` grows to 44px on touch devices. */
+  readonly size = input<SelectSize>('md');
   readonly errorMessages = input<Record<string, string>>();
 
   readonly value = model<string | null>(null);

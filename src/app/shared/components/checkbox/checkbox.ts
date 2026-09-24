@@ -30,6 +30,10 @@ export class Checkbox implements ControlValueAccessor {
   /** Shows the required marker; also shown automatically when the bound control has `Validators.required`. */
   readonly required = input(false, { transform: booleanAttribute });
   readonly errorMessages = input<Record<string, string>>();
+  /** Shows the "some selected" dash; purely visual, `value` is untouched. */
+  readonly indeterminate = input(false, { transform: booleanAttribute });
+  /** Accessible name for a checkbox that has no visible `label`. */
+  readonly ariaLabel = input<string | null>(null);
 
   readonly value = model<boolean>(false);
   protected readonly disabled = signal(false);

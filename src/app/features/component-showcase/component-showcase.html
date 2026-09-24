@@ -71,6 +71,35 @@
     </app-tabs>
   </app-card>
 
+  <!-- Table + Pagination -->
+  <app-card testId="showcase-card-table" title="Table + Pagination">
+    <app-table
+      testId="showcase-table"
+      ariaLabel="Payment plans"
+      [columns]="planColumns"
+      [data]="plans"
+      [rowKey]="planRowKey"
+      [selectable]="true"
+      [(selection)]="selectedPlans"
+      [page]="planPage()"
+      [pageSize]="planPageSize()"
+    >
+      <ng-template appTableCell="id" let-value="value">
+        <strong>{{ value }}</strong>
+      </ng-template>
+      <ng-template appTableCell="amount" let-value="value">
+        {{ value | currency: 'USD' : 'symbol' : '1.0-0' }}
+      </ng-template>
+    </app-table>
+    <app-pagination
+      testId="showcase-pagination"
+      [total]="plans.length"
+      [(page)]="planPage"
+      [(pageSize)]="planPageSize"
+    />
+    <p class="text-body-sm-regular">{{ selectedPlans().length }} selected</p>
+  </app-card>
+
   <!-- Modal -->
   <app-card testId="showcase-card-modal" title="Modal">
     <app-button testId="showcase-modal-trigger" (click)="modalOpen.set(true)"

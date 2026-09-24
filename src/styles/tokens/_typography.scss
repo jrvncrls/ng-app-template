@@ -85,4 +85,23 @@ $body-line-height: 1.5;
   }
 
   --line-height-body: #{$body-line-height};
+
+  // Combined `font` shorthands, for `font: var(--body-sm-semibold)` in component
+  // SCSS. Built from the per-property variables above so the values live in one
+  // place. Headings are one token per level (no weight variants).
+  @each $name, $_ in $headings {
+    --#{$name}: var(--font-weight-#{$name})
+      var(--font-size-#{$name}) /
+      var(--line-height-#{$name})
+      var(--font-family-base);
+  }
+
+  @each $size, $_ in $body-sizes {
+    @each $weight, $_ in $font-weights {
+      --body-#{$size}-#{$weight}: var(--font-weight-#{$weight})
+        var(--font-size-body-#{$size}) /
+        var(--line-height-body)
+        var(--font-family-base);
+    }
+  }
 }

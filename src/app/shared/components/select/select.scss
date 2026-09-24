@@ -59,6 +59,17 @@
   &--invalid {
     border-color: var(--color-error);
   }
+
+  &--sm {
+    min-height: var(--control-height-sm);
+    padding: var(--space-1) var(--space-3);
+    font-size: var(--font-size-body-sm);
+
+    // Keep touch targets at the 44px minimum on phones and tablets.
+    @media (pointer: coarse) {
+      min-height: var(--control-height-md);
+    }
+  }
 }
 
 .select__value {
@@ -133,6 +144,10 @@
   border: var(--border-width-thin) solid var(--color-border);
   border-radius: var(--radius-md);
   box-shadow: 0 var(--space-2) var(--space-4) hsla(0, 0%, 0%, 0.12);
+
+  &--sm .select__option {
+    font-size: var(--font-size-body-sm);
+  }
 }
 
 .select__option {

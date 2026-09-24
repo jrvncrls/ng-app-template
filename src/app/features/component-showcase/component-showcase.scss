@@ -31,3 +31,8 @@
   gap: var(--space-4);
   max-width: 24rem;
 }
+
+// The table and its pager sit in one card; give them room like a page footer.
+app-pagination {
+  margin-top: var(--space-4);
+}

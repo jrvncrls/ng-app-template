@@ -1,0 +1,61 @@
+<nav class="pagination" aria-label="Pagination">
+  <div class="pagination__pages">
+    <button
+      type="button"
+      class="pagination__button pagination__button--bordered"
+      aria-label="Previous page"
+      [disabled]="currentPage() === 1"
+      (click)="goTo(currentPage() - 1)"
+    >
+      <i class="uil uil-angle-left" aria-hidden="true"></i>
+    </button>
+
+    @for (item of items(); track item.key) {
+      @if (item.page === null) {
+        <span class="pagination__gap" aria-hidden="true">…</span>
+      } @else {
+        <button
+          type="button"
+          class="pagination__button"
+          [class.pagination__button--active]="item.page === currentPage()"
+          [attr.aria-current]="item.page === currentPage() ? 'page' : null"
+          [attr.aria-label]="'Page ' + item.page"
+          (click)="goTo(item.page)"
+        >
+          {{ item.page }}
+        </button>
+      }
+    }
+
+    <button
+      type="button"
+      class="pagination__button pagination__button--bordered"
+      aria-label="Next page"
+      [disabled]="currentPage() === pageCount()"
+      (click)="goTo(currentPage() + 1)"
+    >
+      <i class="uil uil-angle-right" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  @if (showSummary() || showPageSize()) {
+    <div class="pagination__meta">
+      @if (showSummary()) {
+        <span class="pagination__summary">
+          Showing {{ firstItem() }} to {{ lastItem() }} of {{ total() }} {{ itemLabel() }}
+        </span>
+      }
+      @if (showPageSize()) {
+        <div class="pagination__size">
+          <app-select
+            [testId]="testId() + '-page-size'"
+            size="sm"
+            [options]="sizeOptions()"
+            [value]="'' + pageSize()"
+            (valueChange)="changePageSize($event)"
+          />
+        </div>
+      }
+    </div>
+  }
+</nav>

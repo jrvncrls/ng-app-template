@@ -1,0 +1,133 @@
+:host {
+  display: block;
+}
+
+.table__scroll {
+  // Scrolls sideways when the columns don't fit, and vertically when `maxHeight` is set.
+  overflow: auto;
+}
+
+.table {
+  width: 100%;
+  // `separate` so the header can have rounded corners and stay pinned while scrolling.
+  border-collapse: separate;
+  border-spacing: 0;
+  font: var(--body-sm-regular);
+  color: var(--color-text-primary);
+  text-align: left;
+}
+
+.table__cell {
+  padding: var(--space-5) var(--space-4);
+  border-bottom: var(--border-width-thin) solid var(--color-border);
+  white-space: nowrap;
+  vertical-align: middle;
+
+  &--head {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding-block: var(--space-3);
+    font: var(--body-sm-bold);
+    background-color: var(--color-surface-elevated);
+    border-bottom: 0;
+  }
+
+  &--select {
+    width: var(--space-10);
+  }
+
+  &--center {
+    text-align: center;
+  }
+
+  &--end {
+    text-align: right;
+  }
+}
+
+// Rounded header corners, matching the rest of the components.
+thead tr > :first-child {
+  border-top-left-radius: var(--radius-lg);
+  border-bottom-left-radius: var(--radius-lg);
+}
+
+thead tr > :last-child {
+  border-top-right-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
+}
+
+.table--compact .table__cell:not(.table__cell--head) {
+  padding-block: var(--space-2);
+}
+
+.table__body {
+  // On the body rather than the wrapper, so nothing white shows behind the
+  // header's rounded corners.
+  background-color: var(--color-surface);
+}
+
+.table__row {
+  transition: background-color 0.15s ease;
+
+  &--selected {
+    background-color: var(--color-primary-subtle);
+  }
+
+  .table--clickable & {
+    cursor: pointer;
+
+    &:not(.table__row--selected):hover {
+      background-color: var(--color-surface-elevated);
+    }
+  }
+}
+
+.table__sort {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+
+  .uil {
+    color: var(--color-text-disabled);
+    transition: color 0.15s ease;
+  }
+
+  &:hover .uil,
+  &--active .uil {
+    color: var(--color-text-primary);
+  }
+
+  &:focus-visible {
+    outline: var(--border-width-medium) solid var(--color-focus-ring);
+  }
+}
+
+.table__empty {
+  padding-block: var(--space-10);
+  text-align: center;
+  color: var(--color-text-secondary);
+  border-bottom: 0;
+}
+
+.table__skeleton {
+  display: block;
+  width: 70%;
+  height: 1em;
+  background-color: var(--color-surface-sunken);
+  border-radius: var(--radius-sm);
+  animation: table-skeleton-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes table-skeleton-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}

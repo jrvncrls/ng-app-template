@@ -75,6 +75,10 @@ Typography lives in its own file (`styles/tokens/_typography.scss`), theme/brand
 `xs`/`sm`/`md`(16px base)/`lg`/`xl`. `styles/utilities/_typography-utilities.scss` generates
 `.text-h1`…`.text-h6` and one `.text-body-{size}-{weight}` class per size×weight combination
 (20 classes) by looping over the same maps — add a heading level or body size there, not here.
+`_typography.scss` also emits combined `font` shorthand tokens — `--h1`…`--h6` and
+`--body-{size}-{weight}` (e.g. `--body-sm-semibold`) — built from the per-property variables, so
+component SCSS can write `font: var(--body-sm-semibold);` instead of setting size/weight/line-height
+separately.
 
 Spacing/radius/border-width (`styles/tokens/_spacing.scss`) aren't part of the original color
 palette spec but exist because the "no hardcoded padding/border/radius" rule requires
@@ -142,6 +146,22 @@ Every component:
 
 **Reference implementation:** `shared/components/input-text/` — read `input-text.ts` and
 `input-text.spec.ts` before building a new form-capable component or its tests.
+
+## Table and pagination (`shared/components/table/`, `shared/components/pagination/`)
+
+`Table<T>` is column-config driven (`columns: TableColumn<T>[]`, `data: T[]`), not mat-table-style
+directive markup. Every option other than those two and `testId` has a default. Override a column's
+rendering with `<ng-template appTableCell="key" let-row let-value="value">` (`TableCell`), not by
+adding per-column inputs.
+
+- **Sorting/paging are client-side by default.** The table sorts `data`, then slices to
+  `page`/`pageSize` if `pageSize` is set. Set `serverSide` and it renders `data` exactly as given;
+  `[(sort)]` then only reports the request. Empty values always sort last.
+- **Selection** is `[(selection)]` (an array of rows) matched via `rowKey` (default: object
+  identity — pass `(row) => row.id` if `data` gets replaced with fresh objects). Select-all acts on
+  the current page and keeps selections on other pages.
+- **`Pagination` is standalone and doesn't know about the table** — bind both to the same
+  `page`/`pageSize` signals, and give it `[total]`. It uses `Select` for the page-size dropdown.
 
 ## HTTP layer (`core/interceptors/`, `core/services/`, `core/http/`)
 
