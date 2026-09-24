@@ -74,12 +74,13 @@ thead tr > :last-child {
     background-color: var(--color-primary-subtle);
   }
 
+  // `surface-elevated` is `grey-50` in the light theme.
+  &:not(&--selected):hover {
+    background-color: var(--color-surface-elevated);
+  }
+
   .table--clickable & {
     cursor: pointer;
-
-    &:not(.table__row--selected):hover {
-      background-color: var(--color-surface-elevated);
-    }
   }
 }
 
