@@ -1,0 +1,89 @@
+<div class="calendar">
+  <div class="calendar__header">
+    <button
+      type="button"
+      class="calendar__nav"
+      aria-label="Previous year"
+      [attr.aria-disabled]="nav().previousYear ? null : true"
+      (click)="shiftMonths(-12, nav().previousYear)"
+    >
+      <i class="uil uil-angle-double-left" aria-hidden="true"></i>
+    </button>
+    <button
+      type="button"
+      class="calendar__nav"
+      aria-label="Previous month"
+      [attr.aria-disabled]="nav().previousMonth ? null : true"
+      (click)="shiftMonths(-1, nav().previousMonth)"
+    >
+      <i class="uil uil-angle-left" aria-hidden="true"></i>
+    </button>
+
+    <div class="calendar__title" [id]="titleId" aria-live="polite" aria-atomic="true">
+      {{ monthLabel() }}
+    </div>
+
+    <button
+      type="button"
+      class="calendar__nav"
+      aria-label="Next month"
+      [attr.aria-disabled]="nav().nextMonth ? null : true"
+      (click)="shiftMonths(1, nav().nextMonth)"
+    >
+      <i class="uil uil-angle-right" aria-hidden="true"></i>
+    </button>
+    <button
+      type="button"
+      class="calendar__nav"
+      aria-label="Next year"
+      [attr.aria-disabled]="nav().nextYear ? null : true"
+      (click)="shiftMonths(12, nav().nextYear)"
+    >
+      <i class="uil uil-angle-double-right" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <table class="calendar__grid" role="grid" [attr.aria-labelledby]="titleId">
+    <thead>
+      <tr>
+        @for (weekday of weekdays(); track weekday.long) {
+          <th class="calendar__weekday" scope="col" [attr.abbr]="weekday.long">
+            {{ weekday.short }}
+          </th>
+        }
+      </tr>
+    </thead>
+    <tbody (mouseleave)="hover(null)">
+      @for (week of weeks(); track week[0].key) {
+        <tr>
+          @for (day of week; track day.key) {
+            <td class="calendar__cell" role="gridcell" [attr.aria-selected]="day.selected">
+              <button
+                type="button"
+                class="calendar__day"
+                [class.calendar__day--outside]="day.outsideMonth"
+                [class.calendar__day--today]="day.today"
+                [class.calendar__day--selected]="day.selected"
+                [class.calendar__day--in-range]="day.inRange"
+                [class.calendar__day--range-start]="day.rangeStart"
+                [class.calendar__day--range-end]="day.rangeEnd"
+                [attr.data-date]="day.key"
+                [attr.tabindex]="day.active ? 0 : -1"
+                [attr.aria-label]="day.ariaLabel"
+                [attr.aria-current]="day.today ? 'date' : null"
+                [attr.aria-disabled]="day.disabled ? true : null"
+                (click)="selectDay(day)"
+                (keydown)="handleKeydown($event)"
+                (mouseenter)="hover(day)"
+                (focus)="dayFocused.set(true)"
+                (blur)="dayFocused.set(false)"
+              >
+                {{ day.label }}
+              </button>
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

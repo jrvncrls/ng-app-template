@@ -1,0 +1,104 @@
+<div class="date-field">
+  @if (label()) {
+    <label class="date-field__label" [for]="inputId">
+      {{ label() }}
+      @if (isRequired()) {
+        <span class="text-error" aria-hidden="true">*</span>
+      }
+    </label>
+  }
+
+  <div
+    class="date-field__control"
+    cdkOverlayOrigin
+    #origin="cdkOverlayOrigin"
+    (focusout)="handleFocusOut($event)"
+  >
+    <input
+      class="date-field__input"
+      [class.date-field__input--open]="open()"
+      [class.date-field__input--invalid]="errorMessage()"
+      type="text"
+      autocomplete="off"
+      [id]="inputId"
+      [placeholder]="resolvedPlaceholder()"
+      [disabled]="disabled()"
+      [value]="text()"
+      [attr.aria-required]="isRequired() || null"
+      [attr.aria-invalid]="errorMessage() ? true : null"
+      [attr.aria-describedby]="errorMessage() ? errorId : null"
+      (input)="handleInput($any($event.target).value)"
+      (blur)="handleInputBlur()"
+      (keydown)="handleInputKeydown($event)"
+    />
+
+    <!-- mousedown is cancelled so opening the calendar doesn't blur the input (which would mark it touched). -->
+    <button
+      #toggleButton
+      type="button"
+      class="date-field__toggle"
+      aria-label="Choose date range"
+      aria-haspopup="dialog"
+      [attr.aria-expanded]="open()"
+      [attr.aria-controls]="open() ? panelId : null"
+      [disabled]="disabled()"
+      (mousedown)="$event.preventDefault()"
+      (click)="toggle()"
+    >
+      <i class="uil uil-calendar-alt" aria-hidden="true"></i>
+    </button>
+
+    <ng-template
+      cdkConnectedOverlay
+      [cdkConnectedOverlayOrigin]="origin"
+      [cdkConnectedOverlayOpen]="open()"
+      [cdkConnectedOverlayPositions]="positions"
+      [cdkConnectedOverlayPush]="true"
+      [cdkConnectedOverlayViewportMargin]="8"
+      (overlayOutsideClick)="handleOutsideClick($event)"
+      (detach)="open.set(false)"
+    >
+      <div
+        class="date-field__panel"
+        role="dialog"
+        aria-label="Choose date range"
+        cdkTrapFocus
+        [id]="panelId"
+        (keydown.escape)="handlePanelEscape($event)"
+      >
+        <techyon-calendar
+          [testId]="testId() + '-calendar'"
+          mode="range"
+          [start]="displayStart()"
+          [end]="displayEnd()"
+          [initialDate]="calendarStart()"
+          [min]="min()"
+          [max]="max()"
+          [isDateDisabled]="isDateDisabled()"
+          [weekStartsOn]="weekStartsOn()"
+          focusOnInit
+          (dateSelected)="selectDate($event)"
+        />
+
+        <div class="date-field__footer">
+          <span class="date-field__hint" aria-live="polite">
+            {{ pendingStart() ? 'Select an end date' : 'Select a start date' }}
+          </span>
+          <techyon-button
+            [testId]="testId() + '-clear'"
+            variant="secondary"
+            size="sm"
+            [disabled]="value() === null"
+            (click)="clear()"
+          >
+            Clear
+          </techyon-button>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+
+  @if (errorMessage(); as message) {
+    <span class="date-field__error" [id]="errorId">{{ message }}</span>
+  }
+</div>

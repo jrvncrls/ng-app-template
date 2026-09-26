@@ -9,6 +9,12 @@ export const DEFAULT_ERROR_MESSAGES: Record<string, string> = {
   maxlength: 'This value is too long.',
   pattern: 'This value is not in the correct format.',
   email: 'Please enter a valid email address.',
+  // Raised by `date-picker` / `date-range-picker` for text that can't be used.
+  invalidDate: 'Please enter a valid date.',
+  invalidRange: 'The end date must not be before the start date.',
+  minDate: 'This date is too early.',
+  maxDate: 'This date is too late.',
+  disabledDate: 'This date is not available.',
 };
 
 const FALLBACK_MESSAGE = 'This field is invalid.';

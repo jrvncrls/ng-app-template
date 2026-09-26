@@ -119,7 +119,7 @@ Every component:
 - Uses minimal animation (simple `transition`s on hover/focus states; no elaborate motion).
 
 **Form-capable components** (`input-text`, `select`, `multi-select`, `checkbox`, `radio`,
-`textarea`, `autocomplete`, `toggle`) additionally:
+`textarea`, `autocomplete`, `toggle`, `date-picker`, `date-range-picker`) additionally:
 
 - Use `readonly value = model<T>(initial);` as the single source of truth. `writeValue` sets it;
   a `constructor` `effect(() => this.onChange(this.value()))` propagates it back out — this is
@@ -142,13 +142,46 @@ Every component:
 - Show validation errors only once `touched` is true (set on `(blur)`), never live on keystroke.
 - Accept `errorMessages = input<Record<string, string>>()` to override the built-in defaults in
   `shared/utils/control-error-messages.ts` (`required`, `minlength`, `maxlength`, `pattern`,
-  `email`). `resolveErrorMessage(errors, customMessages)` is the one place that resolution logic
+  `email`, plus `invalidDate`, `invalidRange`, `minDate`, `maxDate`, `disabledDate` for the date
+  pickers). `resolveErrorMessage(errors, customMessages)` is the one place that resolution logic
   lives — reuse it, don't reimplement it per component.
 - Work identically standalone (`[(value)]`) or in a reactive form (`formControlName`/
   `[formControl]`) — `ngControl` is simply `null` in the standalone case.
 
 **Reference implementation:** `shared/components/input-text/` — read `input-text.ts` and
 `input-text.spec.ts` before building a new form-capable component or its tests.
+
+## Date pickers (`shared/components/{calendar,date-picker,date-range-picker}/`, `shared/utils/date-utils.ts`)
+
+No date library and no Angular Material — native `Date` plus the pure helpers in `date-utils.ts`.
+
+- **`Calendar`** is the one month grid, and only *displays* a selection (`start`/`end`) and emits
+  `dateSelected`; it isn't form-capable. `DatePicker` and `DateRangePicker` decide what a click
+  means. Both pickers share their field/popup styling through
+  `date-picker/_date-field.scss` (the `date-field` BEM block) — same idea as `modal/_modal-panel.scss`.
+- **Values are local-midnight `Date`s** (`DatePicker`: `Date | null`; `DateRangePicker`:
+  `{ start: Date; end: Date } | null`, exported as `DateRange`). Everything compares by calendar day,
+  never by timestamp, and never goes through UTC — don't reach for `new Date('yyyy-mm-dd')` (that's
+  UTC midnight). A range is `null` until *both* ends are picked; a half-picked range lives in the
+  component (`pendingStart`) and is discarded if the popup closes.
+- **Typed text** is parsed with `parseDate(text, format)`; `format` is built from `yyyy`/`MM`/`dd`
+  (default `MM/dd/yyyy`). Text is committed on blur / Enter / opening the popup, not per keystroke.
+  Unusable text (unparseable, out of `min`/`max`, disabled, end before start) sets the value to
+  `null` **and keeps the text**, showing its own message (`invalidDate`, `minDate`, `maxDate`,
+  `disabledDate`, `invalidRange`) ahead of the control's validator errors — a CVA can't add
+  validators without `NG_VALIDATORS`, which would bring back the `NG0200` cycle described above. The
+  text-sync `effect` deliberately leaves such rejected text alone; `writeValue` resets it explicitly.
+- **Popup** is a CDK connected overlay (like `Select`) but with a `role="dialog"` panel and
+  `cdkTrapFocus`, because focus moves *into* the calendar (`focusOnInit`). Escape is handled on the
+  panel with `stopPropagation()` so it closes only the popup, not a `ModalService` modal behind it.
+  The calendar button cancels `mousedown` so opening it doesn't blur the input and mark it touched.
+- **Calendar a11y:** roving `tabindex` (one day in the tab order), arrow/Home/End/PageUp/PageDown
+  navigation (Shift = year), disabled days use `aria-disabled` — not `disabled` — so they stay
+  focusable, and so do the nav buttons at the `min`/`max` edge. `keydown` is bound on the day
+  buttons because a `role="grid"` with handlers would have to be focusable itself.
+- **Testing:** specs that assert focus moved (`afterNextRender` in `Calendar`) call
+  `fixture.autoDetectChanges()`. A plain `detectChanges()` fixture isn't attached to the app, so an
+  automatic tick runs the hook *before* the fixture re-renders and the focus lands on the old DOM.
 
 ## Table and pagination (`shared/components/table/`, `shared/components/pagination/`)
 

@@ -12,6 +12,11 @@ import { Badge, BadgeStatus } from '../../shared/components/badge/badge';
 import { Button } from '../../shared/components/button/button';
 import { Card } from '../../shared/components/card/card';
 import { Checkbox } from '../../shared/components/checkbox/checkbox';
+import { DatePicker } from '../../shared/components/date-picker/date-picker';
+import {
+  DateRange,
+  DateRangePicker,
+} from '../../shared/components/date-range-picker/date-range-picker';
 import { InputText } from '../../shared/components/input-text/input-text';
 import { Loader } from '../../shared/components/loader/loader';
 import { Modal } from '../../shared/components/modal/modal';
@@ -54,6 +59,8 @@ const PATIENTS = ['Kim Douglas', 'Carol Miller', 'Chris Washington', 'Joshua Lon
     Button,
     Card,
     Checkbox,
+    DatePicker,
+    DateRangePicker,
     InputText,
     Loader,
     Modal,
@@ -142,12 +149,20 @@ export class ComponentShowcase {
 
   protected readonly modalOpen = signal(false);
 
+  // Bookings can't be made in the past or on Sundays; the earliest allowed day
+  // is today, so the picker also shows the min-date state.
+  protected readonly today = new Date();
+  protected readonly isSunday = (date: Date) => date.getDay() === 0;
+
   protected readonly form = this.fb.nonNullable.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
     bio: ['', Validators.maxLength(280)],
     color: [null as string | null, Validators.required],
     frameworks: [[] as string[], Validators.required],
     fruit: ['', Validators.required],
+    birthday: [null as Date | null, Validators.required],
+    appointment: [null as Date | null, Validators.required],
+    stay: [null as DateRange | null, Validators.required],
     size: [null as string | null, Validators.required],
     agreeToTerms: [false, Validators.requiredTrue],
     notifyMe: [false],

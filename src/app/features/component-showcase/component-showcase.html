@@ -184,6 +184,30 @@
         formControlName="fruit"
       />
 
+      <techyon-date-picker
+        testId="showcase-date-picker-birthday"
+        label="Birthday"
+        [max]="today"
+        formControlName="birthday"
+      />
+
+      <techyon-date-picker
+        testId="showcase-date-picker-appointment"
+        label="Appointment (from today, no Sundays)"
+        format="yyyy-MM-dd"
+        [min]="today"
+        [isDateDisabled]="isSunday"
+        [weekStartsOn]="1"
+        formControlName="appointment"
+      />
+
+      <techyon-date-range-picker
+        testId="showcase-date-range-picker-stay"
+        label="Stay"
+        [min]="today"
+        formControlName="stay"
+      />
+
       <techyon-radio
         testId="showcase-radio-size"
         label="Size"

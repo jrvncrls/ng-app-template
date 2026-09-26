@@ -1,0 +1,155 @@
+:host {
+  display: block;
+}
+
+.calendar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font: var(--body-sm-regular);
+  color: var(--color-text-primary);
+}
+
+.calendar__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.calendar__title {
+  flex: 1;
+  text-align: center;
+  font: var(--body-md-semibold);
+}
+
+.calendar__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-height-sm);
+  height: var(--control-height-sm);
+  font-size: var(--font-size-body-lg);
+  color: var(--color-text-secondary);
+  background: none;
+  border: 0;
+  border-radius: var(--radius-md);
+  padding: 0;
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+
+  &:hover:not([aria-disabled='true']) {
+    color: var(--color-text-primary);
+    background-color: var(--color-surface-sunken);
+  }
+
+  &:focus-visible {
+    outline: var(--border-width-medium) solid var(--color-focus-ring);
+  }
+
+  &[aria-disabled='true'] {
+    color: var(--color-text-disabled);
+    cursor: not-allowed;
+  }
+
+  // Keep touch targets at the 44px minimum on phones and tablets.
+  @media (pointer: coarse) {
+    width: var(--control-height-md);
+    height: var(--control-height-md);
+  }
+}
+
+.calendar__grid {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.calendar__weekday {
+  padding: var(--space-1) 0;
+  text-align: center;
+  font: var(--body-xs-semibold);
+  color: var(--color-text-secondary);
+}
+
+.calendar__cell {
+  padding: 0;
+  text-align: center;
+}
+
+.calendar__day {
+  width: 100%;
+  height: var(--control-height-sm);
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: var(--border-width-thin) solid transparent;
+  border-radius: var(--radius-md);
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover:not([aria-disabled='true']) {
+    background-color: var(--color-surface-sunken);
+  }
+
+  &:focus-visible {
+    outline: var(--border-width-medium) solid var(--color-focus-ring);
+  }
+
+  @media (pointer: coarse) {
+    height: var(--control-height-md);
+  }
+
+  // Selectable, just not part of this month — so muted, but not the disabled colour.
+  &--outside {
+    color: var(--color-text-secondary);
+  }
+
+  &--today {
+    border-color: var(--color-primary);
+  }
+
+  // The span between the two ends of a range is a continuous band, so the
+  // days inside it are square; only the ends are rounded (see below).
+  &--in-range {
+    background-color: var(--color-primary-subtle);
+    border-radius: 0;
+
+    &:hover:not([aria-disabled='true']) {
+      background-color: var(--color-primary-subtle);
+    }
+  }
+
+  &--selected {
+    color: var(--color-text-inverse);
+    background-color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+
+    &:hover:not([aria-disabled='true']) {
+      background-color: var(--color-primary-hover);
+    }
+  }
+
+  &--range-start {
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
+  }
+
+  &--range-end {
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+
+    // A previewed end (the hovered day) isn't selected yet, but joins the band.
+    &:not(.calendar__day--selected),
+    &:not(.calendar__day--selected):hover:not([aria-disabled='true']) {
+      background-color: var(--color-primary-subtle);
+    }
+  }
+
+  &[aria-disabled='true'] {
+    color: var(--color-text-disabled);
+    background: none;
+    cursor: not-allowed;
+    text-decoration: line-through;
+  }
+}
